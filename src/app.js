@@ -27,6 +27,6 @@ animation = gsap.to("#motionSVG", {
     path: "#motionPath",
     align: "#motionPath",
     alignOrigin: [0.5, 0.5],
-    autoRotate: 90,
+    autoRotate: 0,
   }
 });
