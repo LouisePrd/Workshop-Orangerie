@@ -12,10 +12,10 @@ gsap.set("#tractor", {transformOrigin: "50% 50%"});
 animation = gsap.to("#motionSVG", {
   scrollTrigger: {
     trigger: "#motionPath",
-    start: "top 20%",
-    // end: '+=5000px',
+    start: "top 70%",
+    end: '+=4023',
     scrub: 1,
-    markers: false,
+    markers: true,
     onUpdate: self => {
       gsap.to("#tractor", {rotation: () => self.direction === 1 ? 0 : -180, overwrite: 'auto'});
     }
