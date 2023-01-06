@@ -1,3 +1,7 @@
+:root {
+  --tableau:1.5s infinite alternate;
+}
+
 body {
   padding:0;
   margin:0;
@@ -11,13 +15,15 @@ body {
   display:flex;
   justify-content: center;
   align-items: center;
+  position:relative;
   overflow: hidden;
 }
 
 #introTableau img {
   z-index: 1;
   width:30%;
-  filter:drop-shadow(0 30px 5px #5E5747);
+  box-shadow: 0 30px 5px #5E5747;
+  animation:animTableau var(--tableau);
 }
 
 #halo {
@@ -31,6 +37,31 @@ body {
   background-color:#ece5d6;
   border-radius: 100%;
   filter:blur(140px);
+  animation:animHalo var(--tableau);
+}
+
+@keyframes animHalo {
+  from {
+    background-color: #e1dbca;
+    width: 60vw;
+    height: 50vw;
+  }
+  to {
+    width: 70vw;
+    height: 60vw;
+    background-color: #fff8e8;
+  }
+}
+
+@keyframes animTableau {
+  from {
+    filter:brightness(1);
+    box-shadow: 0 30px 10px #5E5747;
+  }
+  to {
+    filter:brightness(1.1);
+    box-shadow: 0 30px 7px #403c33;
+  }
 }
 
 .st0 {
