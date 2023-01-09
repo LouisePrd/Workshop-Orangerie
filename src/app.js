@@ -1,49 +1,80 @@
-import { gsap } from "gsap";
-import { MotionPathPlugin} from "gsap/MotionPathPlugin";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+async function activateXR() {
+  // Add a canvas element and initialize a WebGL context that is compatible with WebXR.
+  const canvas = document.createElement("canvas");
+  document.body.appendChild(canvas);
+  const gl = canvas.getContext("webgl", { xrCompatible: true });
 
-var animationBiche;
-var animPlan1Part1;
-var animPlan1Part2;
+  const scene = new THREE.Scene();
 
-gsap.registerPlugin(MotionPathPlugin, ScrollTrigger);
+  // The cube will have a different color on each side.
+  const materials = [
+    new THREE.MeshBasicMaterial({ color: 0xff0000 }),
+    new THREE.MeshBasicMaterial({ color: 0x0000ff }),
+    new THREE.MeshBasicMaterial({ color: 0x00ff00 }),
+    new THREE.MeshBasicMaterial({ color: 0xff00ff }),
+    new THREE.MeshBasicMaterial({ color: 0x00ffff }),
+    new THREE.MeshBasicMaterial({ color: 0xffff00 })
+  ];
 
-gsap.set("#motionSVG", { scale: 0.7, autoAlpha: 1 });
-gsap.set("#tractor", {transformOrigin: "50% 50%"});
+  // Create the cube and add it to the demo scene.
+  const cube = new THREE.Mesh(new THREE.BoxBufferGeometry(0.2, 0.2, 0.2), materials);
+  cube.position.set(1, 1, 1);
+  scene.add(cube);
 
+  // Set up the WebGLRenderer, which handles rendering to the session's base layer.
+  const renderer = new THREE.WebGLRenderer({
+    alpha: true,
+    preserveDrawingBuffer: true,
+    canvas: canvas,
+    context: gl
+  });
+  renderer.autoClear = false;
 
-// --- Animation forêt ---
-animPlan1Part1 = gsap.to("#plan1part1", {
-  scrollTrigger: "#foret",
-  x: '50vw',
-  duration:2
-});
+  // The API directly updates the camera matrices.
+  // Disable matrix auto updates so three.js doesn't attempt
+  // to handle the matrices independently.
+  const camera = new THREE.PerspectiveCamera();
+  camera.matrixAutoUpdate = false;
 
-animPlan1Part2 = gsap.to("#plan1part2", {
-  scrollTrigger: "#foret",
-  x: '50vw',
-  duration:2
-});
+  // Initialize a WebXR session using "immersive-ar".
+  const session = await navigator.xr.requestSession("immersive-ar");
+  session.updateRenderState({
+    baseLayer: new XRWebGLLayer(session, gl)
+  });
 
-// --- Animation biche ---
-animationBiche = gsap.to("#motionSVG", {
-  scrollTrigger: {
-    trigger: "#motionPath",
-    start: "top 70%",
-    end: '+=4023',
-    scrub: 1,
-    markers: true,
-    onUpdate: self => {
-      gsap.to("#tractor", {rotation: () => self.direction === 1 ? 0 : -180, overwrite: 'auto'});
+  // A 'local' reference space has a native origin that is located
+  // near the viewer's position at the time the session was created.
+  const referenceSpace = await session.requestReferenceSpace('local');
+
+  // Create a render loop that allows us to draw on the AR view.
+  const onXRFrame = (time, frame) => {
+    // Queue up the next draw request.
+    session.requestAnimationFrame(onXRFrame);
+
+    // Bind the graphics framebuffer to the baseLayer's framebuffer
+    gl.bindFramebuffer(gl.FRAMEBUFFER, session.renderState.baseLayer.framebuffer)
+
+    // Retrieve the pose of the device.
+    // XRFrame.getViewerPose can return null while the session attempts to establish tracking.
+    const pose = frame.getViewerPose(referenceSpace);
+    if (pose) {
+      // In mobile AR, we only have one view.
+      const view = pose.views[0];
+
+      const viewport = session.renderState.baseLayer.getViewport(view);
+      renderer.setSize(viewport.width, viewport.height)
+
+      // Use the view's transform matrix and projection matrix to configure the THREE.camera.
+      camera.matrix.fromArray(view.transform.matrix)
+      camera.projectionMatrix.fromArray(view.projectionMatrix);
+      camera.updateMatrixWorld(true);
+
+      // Render the scene with THREE.WebGLRenderer.
+      renderer.render(scene, camera)
     }
-  },
-  duration: 10,
-  ease: "none",
-  immediateRender: true,
-  motionPath: {
-    path: "#motionPath",
-    align: "#motionPath",
-    alignOrigin: [0.5, 0.5],
-    autoRotate: 0,
   }
-});
+  session.requestAnimationFrame(onXRFrame);
+
+
+  // To be continued in upcoming steps.
+}

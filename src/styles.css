@@ -1,106 +1,11 @@
-/* ======= GENERAL ======= */
-
-:root {
-  --tableau: 1.5s infinite alternate;
-}
-
 body {
-  padding: 0;
-  margin: 0;
-  background-color: #1b1b22;
-}
-
-/* ======= INTRO TABLEAU ======= */
-
-#introTableau {
-  background-color: #949180;
-  height: 100vh;
-  width: 100vw;
   display: flex;
+  margin: 0;
+  flex-flow: row;
   justify-content: center;
-  align-items: center;
-  position: relative;
-  overflow: hidden;
 }
 
-#introTableau img {
-  z-index: 1;
-  width: 30%;
-  box-shadow: 0 30px 5px #5E5747;
-  animation: animTableau var(--tableau);
-}
-
-#halo {
-  position: absolute;
-  top: 0;
-  margin-left: auto;
-  margin-right: auto;
-  width: 70vw;
-  height: 60vw;
-  z-index: 0;
-  background-color: #ece5d6;
-  border-radius: 100%;
-  -webkit-filter: blur(290px);
-  -moz-filter: blur(280px);
-  -ms-filter: blur(140px);
-  -o-filter: blur(140px);
-  filter: blur(140px);
-  animation: animHalo var(--tableau);
-}
-
-@keyframes animHalo {
-  from {
-    background-color: #e1dbca;
-    width: 65vw;
-    height: 55vw;
-  }
-
-  to {
-    width: 70vw;
-    height: 60vw;
-    background-color: #fff8e8;
-  }
-}
-
-@keyframes animTableau {
-  from {
-    filter: brightness(1);
-    box-shadow: 0 30px 10px #5E5747;
-  }
-
-  to {
-    filter: brightness(1.1);
-    box-shadow: 0 30px 7px #403c33;
-  }
-}
-
-/* ======= FORET ======= */
-
-#foret {
-  background: url('assets/blurred_background.png') no-repeat center;
-  background-size: cover;
-}
-
-#foret img {
-  width:50vw;
-  margin-left:-50vw;
-}
-
-/* ======= BICHE ======= */
-
-.st0 {
-  fill: none;
-  stroke: red;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-miterlimit: 5;
-}
-
-.cls-1 {
-  fill: #fff;
-}
-
-.cls-2 {
-  fill: #1e1e1e;
+.enter-xr {
+  margin: 1em;
+  font-size: 18px;
 }

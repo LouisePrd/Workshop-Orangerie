@@ -10,6 +10,7 @@
     "parcel": "latest"
   },
   "dependencies": {
-    "gsap": "^3.11.4"
+    "gsap": "^3.11.4",
+    "three": "^0.148.0"
   }
 }
