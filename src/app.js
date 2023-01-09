@@ -2,14 +2,31 @@ import { gsap } from "gsap";
 import { MotionPathPlugin} from "gsap/MotionPathPlugin";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-var animation;
+var animationBiche;
+var animPlan1Part1;
+var animPlan1Part2;
 
 gsap.registerPlugin(MotionPathPlugin, ScrollTrigger);
 
 gsap.set("#motionSVG", { scale: 0.7, autoAlpha: 1 });
 gsap.set("#tractor", {transformOrigin: "50% 50%"});
 
-animation = gsap.to("#motionSVG", {
+
+// --- Animation forêt ---
+animPlan1Part1 = gsap.to("#plan1part1", {
+  scrollTrigger: "#foret",
+  x: '50vw',
+  duration:2
+});
+
+animPlan1Part2 = gsap.to("#plan1part2", {
+  scrollTrigger: "#foret",
+  x: '50vw',
+  duration:2
+});
+
+// --- Animation biche ---
+animationBiche = gsap.to("#motionSVG", {
   scrollTrigger: {
     trigger: "#motionPath",
     start: "top 70%",
