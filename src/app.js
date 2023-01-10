@@ -28,13 +28,18 @@ async function activateXR() {
   mesh.position.set(0, 0, -1);
   scene.add(mesh);
 
-  const texture2 = loader.load('https://images.unsplash.com/photo-1583083527882-4bee9aba2eea?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1077&q=80');
-  const geometry2 = new THREE.PlaneBufferGeometry(1, 1);
-  const material2 = new THREE.MeshBasicMaterial({ map: texture2 });
-  const mesh2 = new THREE.Mesh(geometry2, material2);
-  mesh2.position.set(3, 0, -5);
-  // mesh.rotateY();
-  scene.add(mesh2);
+//  cube in the ground
+  const cubeGround = new THREE.Mesh(new THREE.BoxBufferGeometry(0.2, 0.2, 0.2), materials);
+  cubeGround.position.set(0, -0.5, -1);
+  
+  // animate cubeGround
+  const animate = () => {
+    requestAnimationFrame(animate);
+    cubeGround.rotation.x += 0.01;
+    cubeGround.rotation.y += 0.01;
+  }
+  animate();
+  scene.add(cubeGround);
 
   const renderer = new THREE.WebGLRenderer({
     alpha: true,
@@ -64,8 +69,6 @@ async function activateXR() {
     // Bind the graphics framebuffer to the baseLayer's framebuffer
     gl.bindFramebuffer(gl.FRAMEBUFFER, session.renderState.baseLayer.framebuffer)
 
-    // Retrieve the pose of the device.
-    // XRFrame.getViewerPose can return null while the session attempts to establish tracking.
     const pose = frame.getViewerPose(referenceSpace);
 
     if (pose) {
@@ -80,8 +83,12 @@ async function activateXR() {
       camera.projectionMatrix.fromArray(view.projectionMatrix);
       camera.updateMatrixWorld(true);
 
-      // Render the scene with THREE.WebGLRenderer.
-      renderer.render(scene, camera)
+      renderer.setAnimationLoop( function () {
+
+        renderer.render( scene, camera );
+      
+      } );
+      
     }
   }
   session.requestAnimationFrame(onXRFrame);
