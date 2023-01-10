@@ -1,7 +1,8 @@
 import * as THREE from "three";
 import { DragControls } from "three/examples/jsm/controls/DragControls.js";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 
-document.getElementById("buttonStart").onclick=async ()=>{
+document.getElementById("buttonStart").onclick = async () => {
   await activateXR();
 };
 
@@ -14,7 +15,6 @@ window.addEventListener("resize", onWindowResize, false);
 function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
-
   renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
@@ -29,14 +29,7 @@ const materials = [
   new THREE.MeshBasicMaterial({ color: 0xffff00 }),
 ];
 
-const cube = new THREE.Mesh(
-  new THREE.BoxGeometry(0.2, 0.2, 0.2),
-  materials
-);
-cube.position.set(0, 0, -1);
-// scene.add(cube);
-
-// ADD Image to the scene
+// Add Image to the scene
 const loader = new THREE.TextureLoader();
 const texture = loader.load(
   "https://images.unsplash.com/photo-1516795768040-fde4b306f577?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGRvZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=1000&q=60"
@@ -47,12 +40,15 @@ const mesh = new THREE.Mesh(geometry, material);
 mesh.position.set(0, 0, -1);
 scene.add(mesh);
 
-//  cube in the ground
+// Cube in the ground
 const cubeGround = new THREE.Mesh(
   new THREE.BoxGeometry(0.2, 0.2, 0.2),
   materials
 );
 cubeGround.position.set(0, -0.5, -1);
+
+// Tab for Drag Controls
+const dragObjetcs = [cubeGround, mesh];
 
 // animate cubeGround
 const animate = () => {
@@ -74,19 +70,18 @@ renderer.autoClear = false;
 const camera = new THREE.PerspectiveCamera();
 camera.matrixAutoUpdate = false;
 
-// (code Louise en cours)
+// Orbit controls
+const orbitControls = new OrbitControls(camera, renderer.domElement);
 // Drag controls
-// const controls = new DragControls(cubeGround, camera, renderer.domElement);
-// controls.addEventListener("dragstart", function (event) {
-//   event.object.material.emissive.set(0xaaaaaa);
-// });
-// controls.addEventListener("dragend", function (event) {
-//   event.object.material.emissive.set(0x000000);
-// });
-
+const controls = new DragControls(dragObjetcs, camera, renderer.domElement);
+controls.addEventListener("dragstart", function (event) {
+  event.object.material.emissive.set(0xaaaaaa);
+});
+controls.addEventListener("dragend", function (event) {
+  event.object.material.emissive.set(0x000000);
+});
 
 async function activateXR() {
-
   // Initialize a WebXR session using "immersive-ar".
   const session = await navigator.xr.requestSession("immersive-ar");
   session.updateRenderState({
@@ -127,5 +122,4 @@ async function activateXR() {
   };
   session.requestAnimationFrame(onXRFrame);
 
-  // To be continued in upcoming steps.
 }
