@@ -28,6 +28,14 @@ async function activateXR() {
   mesh.position.set(0, 0, -1);
   scene.add(mesh);
 
+  const texture2 = loader.load('https://images.unsplash.com/photo-1583083527882-4bee9aba2eea?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1077&q=80');
+  const geometry2 = new THREE.PlaneBufferGeometry(1, 1);
+  const material2 = new THREE.MeshBasicMaterial({ map: texture2 });
+  const mesh2 = new THREE.Mesh(geometry2, material2);
+  mesh2.position.set(3, 0, -5);
+  // mesh.rotateY();
+  scene.add(mesh2);
+
   const renderer = new THREE.WebGLRenderer({
     alpha: true,
     preserveDrawingBuffer: true,
@@ -36,9 +44,6 @@ async function activateXR() {
   });
   renderer.autoClear = false;
 
-  // The API directly updates the camera matrices.
-  // Disable matrix auto updates so three.js doesn't attempt
-  // to handle the matrices independently.
   const camera = new THREE.PerspectiveCamera();
   camera.matrixAutoUpdate = false;
 
