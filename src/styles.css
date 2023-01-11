@@ -3,9 +3,21 @@ body {
   margin: 0;
   flex-flow: row;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 .enter-xr {
   margin: 1em;
   font-size: 18px;
+}
+
+#buttonStart {
+  font-size: 2em;
+  max-height: 70px;
+  margin-top: 50px;
+  width: fit-content;
+  padding: 5px;
+  background-color: rgb(237, 233, 222);
+  border-radius: 8px;
 }

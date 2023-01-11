@@ -29,16 +29,25 @@ const materials = [
   new THREE.MeshBasicMaterial({ color: 0xffff00 }),
 ];
 
-// Add Image to the scene
+// Add Image to the scene : doe
 const loader = new THREE.TextureLoader();
 const texture = loader.load(
-  "https://images.unsplash.com/photo-1516795768040-fde4b306f577?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGRvZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=1000&q=60"
+  "assets/les_biches_marie_laurencin.png"
 );
 const geometry = new THREE.PlaneGeometry(0.5, 0.5);
 const material = new THREE.MeshBasicMaterial({ map: texture });
 const mesh = new THREE.Mesh(geometry, material);
 mesh.position.set(0, 0, -1);
-scene.add(mesh);
+// scene.add(mesh);
+
+// Add rectangle to the scene
+const geometryPlane = new THREE.PlaneGeometry(0.6, 0.6);
+const materialPlane = new THREE.MeshBasicMaterial( {color: 689582, side: THREE.DoubleSide, opacity: 0.01} );
+const plane = new THREE.Mesh( geometryPlane, materialPlane );
+plane.material.transparent = true;
+plane.position.set(0, 0, -1);
+
+scene.add( plane );
 
 // Cube in the ground
 const cubeGround = new THREE.Mesh(
@@ -46,18 +55,10 @@ const cubeGround = new THREE.Mesh(
   materials
 );
 cubeGround.position.set(0, -0.5, -1);
+// scene.add(cubeGround);
 
 // Tab for Drag Controls
-const dragObjetcs = [cubeGround, mesh];
-
-// animate cubeGround
-const animate = () => {
-  requestAnimationFrame(animate);
-  cubeGround.rotation.x += 0.01;
-  cubeGround.rotation.y += 0.01;
-};
-animate();
-scene.add(cubeGround);
+const dragObjetcs = [plane];
 
 const renderer = new THREE.WebGLRenderer({
   alpha: true,
@@ -70,8 +71,6 @@ renderer.autoClear = false;
 const camera = new THREE.PerspectiveCamera();
 camera.matrixAutoUpdate = false;
 
-// Orbit controls
-const orbitControls = new OrbitControls(camera, renderer.domElement);
 // Drag controls
 const controls = new DragControls(dragObjetcs, camera, renderer.domElement);
 controls.addEventListener("dragstart", function (event) {
@@ -80,6 +79,19 @@ controls.addEventListener("dragstart", function (event) {
 controls.addEventListener("dragend", function (event) {
   event.object.material.emissive.set(0x000000);
 });
+
+
+// test pinch
+window.addEventListener('gestureend', function(e) {
+  let x = plane.scale.x;
+  let y = plane.scale.y;
+  let z = plane.scale.z;
+  if (e.scale < 1.0) {
+      plane.scale.set(x-0.1, y-0.1, z-0.1);
+  } else if (e.scale > 1.0) {
+    plane.scale.set(x+0.1, y+0.1, z+0.1);
+  }
+}, false);
 
 async function activateXR() {
   // Initialize a WebXR session using "immersive-ar".
@@ -115,11 +127,20 @@ async function activateXR() {
       camera.projectionMatrix.fromArray(view.projectionMatrix);
       camera.updateMatrixWorld(true);
 
-      renderer.setAnimationLoop(function () {
+      // Render loop
+      var render = function(){
         renderer.render(scene, camera);
-      });
+        requestAnimationFrame(render); 
+      }
+
+      render();
+
+      // ancienne loop (au cas ou hihi)
+      // renderer.setAnimationLoop(function () {
+      //   orbitControls.update();
+      //   renderer.render(scene, camera);
+      // });
     }
   };
   session.requestAnimationFrame(onXRFrame);
-
 }
