@@ -1,11 +1,198 @@
+/* ======== CODES ========
+
+• Positions
+• Margins
+• Dimensions
+• Displays
+• Borders
+• Colors & Background
+• Fonts
+
+*/ 
+
+/* ===== GENERAL ===== */ 
+:root {
+  --main:white;
+  --dark:black;
+  --accent:#4F80B3;
+  --font: 'Arial', sans-serif;
+}
+
 body {
-  display: flex;
   margin: 0;
+  display: flex;
   flex-flow: row;
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  font-family: var(--font);
 }
+
+/* ======= ARTICLES ======= */ 
+
+.article {
+  position:absolute;
+  top:0;
+  left:0;
+  padding-top:2vh;
+  width:100vw;
+  height:auto;
+  overflow-x: hidden;
+  color:var(--identity);
+}
+
+/* ===== INTRO ===== */ 
+
+.intro {
+  display:flex;
+  flex-direction: column;
+}
+
+.controls {
+  padding:0vw 4vw;
+  display:flex;
+  justify-content: space-between;
+}
+
+.circle {
+  position:absolute;
+  z-index:-1;
+  border-radius: 50%;
+}
+
+/* ===== Second Page ===== */ 
+
+.secondPage {
+  margin-top:4vh;
+  background-color:var(--dark);
+}
+
+.secondPage img {
+  padding-bottom:0;
+  margin-bottom: 0 !important;
+  width:100%;
+}
+
+.legend {
+  margin:0;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width:100%;
+  height:38vh;
+  background-color: var(--dark);
+}
+
+.legend hr {
+  width:76%;
+  border:1.5px solid var(--main);
+}
+
+/* ===== Third Page ===== */ 
+
+.thirdPage {
+  display:flex;
+  justify-content: center;
+  font-weight:700;
+  font-style:italic;
+  text-align:right;
+  line-height:26px;
+}
+
+/* ===== Fourth Page ===== */ 
+
+.fourthPage {
+  position:relative;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.IACircle {
+  margin-top:4.5vh;
+  display:flex;
+  align-items: center;
+  flex-direction: column;
+  text-align:center;
+}
+
+/* -- Texts -- */
+
+.article h1 {
+  margin-top:8vh;
+  padding:0vw 8vw;
+  font-size: 3rem;
+}
+
+.article p {
+  margin-top: 2vh;
+  padding:0vw 9.5vw;
+  color:var(--main);
+  font-size: 1.3rem;
+  line-height:28px;
+}
+
+.article button {
+  color:var(--accent);
+  background:none;
+  border:none;
+  font-size:.8rem;
+  font-weight: 700;
+}
+
+.legend h3 {
+  margin-bottom:5vh;
+  color:var(--main);
+  font-size:1.3rem;
+}
+
+.secondPage p, .thirdPage p {
+  margin:0;
+}
+
+.thirdPage p {
+  padding-top:6vh;
+  padding-bottom:5vh;
+  width:80%;
+}
+
+.fourthPage h2 {
+  margin:0;
+  padding-top:7vh;
+  color:var(--main);
+  font-size:2.8rem;
+  text-transform: uppercase;
+}
+
+/* -- Specificities -- */
+
+#cubisme {
+  --identity:#CECECE;
+}
+
+#cubisme .introCircle {
+  left:-37vw;
+  top:42.5vh;
+  width:69vh;
+  height:77vh;
+  background-color: var(--identity);
+}
+
+#cubisme .thirdPage {
+  background: url('/src/assets/ml-cubisme.png') center no-repeat;
+  background-size:cover;
+}
+
+#cubisme .IACircle {
+  width:150vw;
+  height:48vh;
+  background-color: #88D188;
+  z-index:-1;
+  border-radius: 50%;
+}
+
+/* ======= XR ======= */ 
 
 .enter-xr {
   margin: 1em;
