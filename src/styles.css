@@ -10,12 +10,29 @@
 
 */ 
 
+/* ===== FONTS ===== */ 
+
+@font-face {
+  font-family: "ZapfHumanist601BT-Roman";
+  src: url("/src/fonts/ZapfHumanist601BT-Roman.otf");
+}
+@font-face {
+  font-family: "SuisseIntl-Regular";
+  src: url("/src/fonts/SuisseIntl-Regular.ttf");
+}
+@font-face {
+  font-family: "SuisseIntl-Bold";
+  src: url("/src/fonts/SuisseIntl-Bold.ttf");
+  font-weight: bold;
+}
+
 /* ===== GENERAL ===== */ 
+
 :root {
-  --main:white;
+  --main:#FFFEF3;
   --dark:black;
-  --accent:#4F80B3;
-  --font: 'Arial', sans-serif;
+  --title: 'ZapfHumanist601BT-Roman';
+  --text: 'SuisseIntl-Regular';
 }
 
 body {
@@ -25,7 +42,13 @@ body {
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  font-family: var(--font);
+  color:var(--dark);
+  background-color: var(--dark);
+  font-family: var(--text);
+}
+
+h1, h2, h3 {
+  font-family: var(--title);
 }
 
 /* ======= ARTICLES ======= */ 
@@ -38,33 +61,43 @@ body {
   width:100vw;
   height:auto;
   overflow-x: hidden;
-  color:var(--identity);
+  background-color:var(--main);
 }
 
-/* ===== INTRO ===== */ 
+hr {
+  margin:0;
+  width:35vw;
+  border:1px solid var(--dark);
+}
 
-.intro {
+/* ===== FIRST PAGE ===== */ 
+
+.firstPage {
   display:flex;
   flex-direction: column;
+  padding:0vw 8vw;
 }
 
 .controls {
-  padding:0vw 4vw;
+  padding-top:1.5vh;
   display:flex;
   justify-content: space-between;
 }
 
-.circle {
-  position:absolute;
-  z-index:-1;
-  border-radius: 50%;
+.firstPage p {
+  padding-top:3vh;
+  padding-bottom:8vh;
 }
 
 /* ===== Second Page ===== */ 
 
 .secondPage {
-  margin-top:4vh;
-  background-color:var(--dark);
+  margin-top:8vh;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 .secondPage img {
@@ -81,12 +114,15 @@ body {
   flex-direction: column;
   width:100%;
   height:38vh;
-  background-color: var(--dark);
 }
 
 .legend hr {
   width:76%;
-  border:1.5px solid var(--main);
+  border:1.5px solid var(--dark);
+}
+
+.secondPage iframe {
+  margin:6vh 0vh;
 }
 
 /* ===== Third Page ===== */ 
@@ -94,47 +130,33 @@ body {
 .thirdPage {
   display:flex;
   justify-content: center;
-  font-weight:700;
-  font-style:italic;
-  text-align:right;
   line-height:26px;
 }
 
 /* ===== Fourth Page ===== */ 
 
 .fourthPage {
-  position:relative;
-  display:flex;
-  flex-direction: column;
-  align-items: center;
+  text-align:center;
 }
 
-.IACircle {
-  margin-top:4.5vh;
-  display:flex;
-  align-items: center;
-  flex-direction: column;
-  text-align:center;
+.fourthPage img {
+  margin-top:6vh;
 }
 
 /* -- Texts -- */
 
 .article h1 {
   margin-top:8vh;
-  padding:0vw 8vw;
-  font-size: 3rem;
+  font-size: 2.1rem;
+  line-height:40px;
 }
 
 .article p {
-  margin-top: 2vh;
-  padding:0vw 9.5vw;
-  color:var(--main);
-  font-size: 1.3rem;
+  font-size: 1.25rem;
   line-height:28px;
 }
 
 .article button {
-  color:var(--accent);
   background:none;
   border:none;
   font-size:.8rem;
@@ -143,53 +165,72 @@ body {
 
 .legend h3 {
   margin-bottom:5vh;
-  color:var(--main);
   font-size:1.3rem;
 }
 
-.secondPage p, .thirdPage p {
+.secondPage p {
   margin:0;
+  padding:0vw 3vw;
 }
 
 .thirdPage p {
-  padding-top:6vh;
-  padding-bottom:5vh;
+  margin:0;
+  padding-top:8vh;
+  padding-bottom:8vh;
   width:80%;
 }
 
 .fourthPage h2 {
   margin:0;
   padding-top:7vh;
-  color:var(--main);
   font-size:2.8rem;
   text-transform: uppercase;
 }
 
+.fourthPage p {
+  padding:0vw 4vw;
+}
+
 /* -- Specificities -- */
-
-#cubisme {
-  --identity:#CECECE;
-}
-
-#cubisme .introCircle {
-  left:-37vw;
-  top:42.5vh;
-  width:69vh;
-  height:77vh;
-  background-color: var(--identity);
-}
 
 #cubisme .thirdPage {
   background: url('/src/assets/ml-cubisme.png') center no-repeat;
   background-size:cover;
 }
 
-#cubisme .IACircle {
-  width:150vw;
-  height:48vh;
-  background-color: #88D188;
-  z-index:-1;
-  border-radius: 50%;
+#nymphisme .thirdPage {
+  display:flex;
+  align-items: flex-end;
+  height:79vh;
+  text-align: right;
+  background: url('/src/assets/exemple-2-nymphisme.png') center no-repeat;
+  background-size:cover;
+}
+
+#feminisme .thirdPage {
+  display:flex;
+  align-items: center;
+  height:80vh;
+  text-align: right;
+  background: url('/src/assets/ml-rupture.png') center no-repeat;
+  background-size:cover;
+}
+
+#artiste .thirdPage {
+  display:flex;
+  align-items: center;
+  height:70vh;
+  text-align: right;
+  background: url('/src/assets/exemple-artiste.png') center no-repeat;
+  background-size:cover;
+}
+
+#lesBiches .thirdPage {
+  display:flex;
+  align-items: center;
+  text-align: right;
+  background: url('/src/assets/exemple-2-lesbiches.png') center no-repeat;
+  background-size:cover;
 }
 
 /* ======= XR ======= */ 
