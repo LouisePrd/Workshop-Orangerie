@@ -2,10 +2,12 @@ import * as THREE from "three";
 import { AxesHelper } from "three";
 import { DragControls } from "three/examples/jsm/controls/DragControls.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-import TextSprite from '@seregpie/three.text-sprite';
+
+let started = false;
 
 document.getElementById("buttonStart").onclick = async () => {
   await activateXR();
+  started = true;
 };
 
 const canvas = document.createElement("canvas");
@@ -57,9 +59,9 @@ const cylinder = new THREE.Mesh(
   new THREE.MeshBasicMaterial({ map: textureCylinder, side: THREE.DoubleSide })
 );
 
-
 function start() {
   scene.add(cylinder);
+  started = false;
 } // create cylinder
 
 // Tab for Drag Controls
@@ -77,7 +79,7 @@ const camera = new THREE.PerspectiveCamera();
 camera.matrixAutoUpdate = false;
 
 // Add button start fixed
-const button = new THREE.PlaneGeometry(0.2, 0.2);
+const button = new THREE.PlaneGeometry(0.25, 0.2);
 const materialButton = new THREE.MeshBasicMaterial({
   color: 689582,
   side: THREE.DoubleSide,
@@ -85,7 +87,37 @@ const materialButton = new THREE.MeshBasicMaterial({
 const buttonStart = new THREE.Mesh(button, materialButton);
 scene.add(camera);
 camera.add(buttonStart);
-buttonStart.position.set(0, -0.4, -1);
+buttonStart.position.set(0, -0.7, -1);
+
+// get position buttonstart screen
+let widthHalf = window.innerWidth / 2;
+let heightHalf = window.innerHeight / 2;
+
+window.addEventListener("touchend", function (e) {
+  if (started) {
+    let x = e.changedTouches[0].clientX;
+    let y = e.changedTouches[0].clientY;
+    let centreX = buttonStart.position.x * widthHalf + widthHalf;
+    let centreY = -(buttonStart.position.y * heightHalf) + heightHalf;
+
+    if (
+      x > centreX - 80 &&
+      x < centreX + 80 &&
+      y > centreY + 30 &&
+      y < centreY + 90
+    ) {
+      alert("yaaay");
+      // start();
+      removebutton();
+    }
+  }
+});
+
+function removebutton() {
+  scene.remove(buttonStart);
+  buttonStart.geometry.dispose();
+  buttonStart.material.dispose();
+}
 
 // Drag controls
 const controls = new DragControls(dragObjetcs, camera, renderer.domElement);
