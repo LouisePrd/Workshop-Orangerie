@@ -2,6 +2,7 @@ import * as THREE from "three";
 import { AxesHelper } from "three";
 import { DragControls } from "three/examples/jsm/controls/DragControls.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+import TextSprite from '@seregpie/three.text-sprite';
 
 document.getElementById("buttonStart").onclick = async () => {
   await activateXR();
@@ -33,15 +34,6 @@ const materials = [
   new THREE.MeshBasicMaterial({ color: 0xffff00 }),
 ];
 
-// Add Image to the scene : doe
-const loader = new THREE.TextureLoader();
-const texture = loader.load("assets/les_biches_marie_laurencin.png");
-const geometry = new THREE.PlaneGeometry(0.5, 0.5);
-const material = new THREE.MeshBasicMaterial({ map: texture });
-const mesh = new THREE.Mesh(geometry, material);
-mesh.position.set(0, 0, -1);
-// scene.add(mesh);
-
 // Add rectangle to the scene to set the painting
 const geometryPlane = new THREE.PlaneGeometry(0.62, 0.43);
 const materialPlane = new THREE.MeshBasicMaterial({
@@ -65,7 +57,10 @@ const cylinder = new THREE.Mesh(
   new THREE.MeshBasicMaterial({ map: textureCylinder, side: THREE.DoubleSide })
 );
 
-scene.add(cylinder);
+
+function start() {
+  scene.add(cylinder);
+} // create cylinder
 
 // Tab for Drag Controls
 const dragObjetcs = [plane];
@@ -80,6 +75,17 @@ renderer.autoClear = false;
 
 const camera = new THREE.PerspectiveCamera();
 camera.matrixAutoUpdate = false;
+
+// Add button start fixed
+const button = new THREE.PlaneGeometry(0.2, 0.2);
+const materialButton = new THREE.MeshBasicMaterial({
+  color: 689582,
+  side: THREE.DoubleSide,
+});
+const buttonStart = new THREE.Mesh(button, materialButton);
+scene.add(camera);
+camera.add(buttonStart);
+buttonStart.position.set(0, -0.4, -1);
 
 // Drag controls
 const controls = new DragControls(dragObjetcs, camera, renderer.domElement);
