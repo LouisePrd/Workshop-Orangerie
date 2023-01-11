@@ -60,8 +60,10 @@ const textureCylinder = loader2.load(
   "https://images.unsplash.com/photo-1499336315816-097655dcfbda?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2447&q=80"
 );
 
+const coef = 0.6;
+
 const cylinder = new THREE.Mesh(
-  new THREE.CylinderGeometry(1.2, 1.2, 1.2, 10, 1, true),
+  new THREE.CylinderGeometry(1.26 * coef, 1.26 * coef, .1 * coef, 32, 1, true),
   new THREE.MeshBasicMaterial({ map: textureCylinder, side: THREE.DoubleSide })
 );
 
