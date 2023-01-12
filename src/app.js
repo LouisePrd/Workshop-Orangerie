@@ -22,28 +22,12 @@ let article5 = document.getElementById("lesBiches");
 document.getElementById("buttonStart").onclick = async () => {
   await activateXR();
   started = true;
-
-  // À mettre au trigger de chaque bouton correspondant
-  // ----- Article #1 Cubisme
-  // triggerArticle(article1);
-
-  // ----- Page #2 Nymphisme
-  // triggerArticle(article2);
-
-  // ----- Page #3 Féminisme
-  // triggerArticle(article3);
-
-  // ----- Page #4 Artiste
-  // triggerArticle(article4);
-  
-  // ----- Page #5 Les Biches
-  // triggerArticle(article5);
 };
 
 let activate = false;
 
 function checkField() {
-  if (isInFieldOfCamera(buttonStart)) {
+  if (isInFieldOfCamera(btnFirstArticle)) {
     inFiled = true;
   } else {
     inFiled = false;
@@ -52,17 +36,17 @@ function checkField() {
   if (inFiled && !activate) {
     activate = true;
     setTimeout(() => {
-      buttonStart.scale.set(
-        buttonStart.scale.x + 0.2,
-        buttonStart.scale.y + 0.2,
-        buttonStart.scale.z + 0.2
+      btnFirstArticle.scale.set(
+        btnFirstArticle.scale.x + 0.2,
+        btnFirstArticle.scale.y + 0.2,
+        btnFirstArticle.scale.z + 0.2
       );
     }, 500);
   } else if (!inFiled && activate) {
-    buttonStart.scale.set(
-      buttonStart.scale.x - 0.2,
-      buttonStart.scale.y - 0.2,
-      buttonStart.scale.z - 0.2
+    btnFirstArticle.scale.set(
+      btnFirstArticle.scale.x - 0.2,
+      btnFirstArticle.scale.y - 0.2,
+      btnFirstArticle.scale.z - 0.2
     );
     activate = false;
   }
@@ -112,7 +96,7 @@ const cylinder = new THREE.Mesh(
 );
 
 function start(x, y, z) {
-  cylinder.scale.set(plane.scale.x, plane.scale.y * 1.2 , plane.scale.z);
+  cylinder.scale.set(-1, plane.scale.y * 1.2 , plane.scale.z);
   cylinder.position.set(x, y, z);
   scene.add(cylinder);
   started = false;
@@ -136,13 +120,40 @@ const buttonCircle = new THREE.CircleGeometry(0.25, 32);
 const materialButton = new THREE.MeshBasicMaterial({
   side: THREE.DoubleSide,
 });
-const buttonStart = new THREE.Mesh(buttonCircle, materialButton);
-buttonStart.position.set(planex, planey, -1);
-buttonStart.rotation.y = -0.6;
+const btnFirstArticle = new THREE.Mesh(buttonCircle, materialButton);
+btnFirstArticle.position.set(planex + 2, planey, -0.3);
+// btnFirstArticle position behind plane
+btnFirstArticle.rotation.y = -0.8;
 const textureCircle = loader2.load(textureBtn);
-buttonStart.material.map = textureCircle;
-buttonStart.scale.set(0.4, 0.4, 0.4);
-scene.add(buttonStart);
+createCircle(btnFirstArticle);
+
+const btnSecondArticle = new THREE.Mesh(buttonCircle, materialButton);
+// btnSecondArticle.position.set(planex + 2, planey, -0.8);
+// btnSecondArticle.rotation.y = -0.8;
+// createCircle(btnSecondArticle);
+
+// const btnThirdArticle = new THREE.Mesh(buttonCircle, materialButton);
+// btnThirdArticle.position.set(planex + 2.5, planey, -0.8);
+// btnThirdArticle.rotation.y = -0.8;
+// createCircle(btnThirdArticle);
+
+// const btnFourthArticle = new THREE.Mesh(buttonCircle, materialButton);
+// btnFourthArticle.position.set(planex + 3, planey, -1.8);
+// btnFourthArticle.rotation.y = -0.8;
+// createCircle(btnFourthArticle);
+
+// const btnFifthArticle = new THREE.Mesh(buttonCircle, materialButton);
+// btnFifthArticle.position.set(planex + 3.5, planey, 0);
+// btnFifthArticle.rotation.y = -0.8;
+// createCircle(btnFifthArticle);
+
+function createCircle(mesh) {
+  mesh.material.map = textureCircle;
+  mesh.scale.set(0.3, 0.3, 0.3);
+  mesh.material.transparent = true;
+  mesh.material.opacity = 0.8;
+  scene.add(mesh);
+}
 
 const interactionManager = new InteractionManager(
   renderer,
@@ -158,9 +169,27 @@ plane.addEventListener("click", (event) => {
   start(plane.position.x, plane.position.y, plane.position.z);
 });
 
-interactionManager.add(buttonStart);
-buttonStart.addEventListener("click", (event) => {
-  // soluce
+
+// Interactive buttons -> Manage
+interactionManager.add(btnFirstArticle);
+btnFirstArticle.addEventListener("click", (event) => {
+  triggerArticle(article1);
+});
+interactionManager.add(btnSecondArticle);
+btnSecondArticle.addEventListener("click", (event) => {
+  triggerArticle(article2);
+});
+interactionManager.add(btnThirdArticle);
+btnThirdArticle.addEventListener("click", (event) => {
+  triggerArticle(article3);
+});
+interactionManager.add(btnFourthArticle);
+btnFourthArticle.addEventListener("click", (event) => {
+  triggerArticle(article4);
+});
+interactionManager.add(btnFifthArticle);
+btnFifthArticle.addEventListener("click", (event) => {
+  triggerArticle(article5);
 });
 
 // desactivate dragcontrols
@@ -239,7 +268,6 @@ async function activateXR() {
     const pose = frame.getViewerPose(referenceSpace);
 
     if (pose) {
-      // In mobile AR, we only have one view.
       const view = pose.views[0];
 
       const viewport = session.renderState.baseLayer.getViewport(view);
