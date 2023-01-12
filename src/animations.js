@@ -1,19 +1,20 @@
 
 window.addEventListener('DOMContentLoaded', (event) => {
     // ===== Variables =====
+    // Intro pages
     var intro1 = document.getElementById("intro1");
     var intro2 = document.getElementById("intro2");
     var intro3 = document.getElementById("intro3");
 
+    // Buttons
     var start = document.getElementById("buttonStart");
+    var back = document.getElementById("back");
 
-    var article1 = document.getElementById("cubisme");
-    var article2 = document.getElementById("nymphisme");
-    var article3 = document.getElementById("feminisme");
-    var article4 = document.getElementById("artiste");
-    var article5 = document.getElementById("lesBiches");
+    // Articles
+    let allArticles = document.getElementsByClassName("article");
 
     // ===== Introduction animation =====
+
     // appear(intro1);
     // setTimeout(() => {
     //     disappear(intro1);
@@ -30,8 +31,16 @@ window.addEventListener('DOMContentLoaded', (event) => {
     // setTimeout(() => {
     //     start.style.letterSpacing = "4px";
     // }, 9000)
-});
 
+    // ===== Articles animation =====
+
+    back.addEventListener("click", (event) => {
+        for(let i=0; i < allArticles.length; i++) {
+            console.log(allArticles[i]) 
+            allArticles[i].style.display = "none";
+        }
+      });
+});
 
 // ===== FUNCTIONS =====
 

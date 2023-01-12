@@ -12,9 +12,32 @@ let started = false;
 let pinchActivate = true;
 let inFiled = false;
 
+// Articles
+let article1 = document.getElementById("cubisme");
+let article2 = document.getElementById("nymphisme");
+let article3 = document.getElementById("feminisme");
+let article4 = document.getElementById("artiste");
+let article5 = document.getElementById("lesBiches");
+
 document.getElementById("buttonStart").onclick = async () => {
   await activateXR();
   started = true;
+
+  // À mettre au trigger de chaque bouton correspondant
+  // ----- Article #1 Cubisme
+  // triggerArticle(article1);
+
+  // ----- Page #2 Nymphisme
+  // triggerArticle(article2);
+
+  // ----- Page #3 Féminisme
+  // triggerArticle(article3);
+
+  // ----- Page #4 Artiste
+  // triggerArticle(article4);
+  
+  // ----- Page #5 Les Biches
+  // triggerArticle(article5);
 };
 
 let activate = false;
@@ -46,6 +69,7 @@ function checkField() {
 }
 
 const canvas = document.createElement("canvas");
+canvas.attributes.id = "AR";
 
 document.body.appendChild(canvas);
 const gl = canvas.getContext("webgl", { xrCompatible: true });
@@ -132,6 +156,11 @@ plane.addEventListener("click", (event) => {
   // removebutton();
   pinchActivate = false;
   start(plane.position.x, plane.position.y, plane.position.z);
+});
+
+interactionManager.add(buttonStart);
+buttonStart.addEventListener("click", (event) => {
+  // soluce
 });
 
 // desactivate dragcontrols
