@@ -6,6 +6,7 @@ import {
   CSS2DObject,
 } from "three/examples/jsm/renderers/CSS2DRenderer.js";
 import { InteractionManager } from "three.interactive";
+import bg from "./assets/bg.jpg";
 
 let started = false;
 let pinchActivate = true;
@@ -30,16 +31,6 @@ function onWindowResize() {
 
 const scene = new THREE.Scene();
 
-const materials = [
-  new THREE.MeshBasicMaterial({ color: 0xff0000 }),
-  new THREE.MeshBasicMaterial({ color: 0x0000ff }),
-  new THREE.MeshBasicMaterial({ color: 0x00ff00 }),
-  new THREE.MeshBasicMaterial({ color: 0xff00ff }),
-  new THREE.MeshBasicMaterial({ color: 0x00ffff }),
-  new THREE.MeshBasicMaterial({ color: 0xffff00 }),
-];
-
-
 // Add rectangle to the scene to set the painting
 const geometryPlane = new THREE.PlaneGeometry(0.62, 0.43);
 const materialPlane = new THREE.MeshBasicMaterial({
@@ -55,13 +46,13 @@ scene.add(plane);
 // ADD Cylinder to the scene
 const loader2 = new THREE.TextureLoader();
 const textureCylinder = loader2.load(
-  "https://images.unsplash.com/photo-1499336315816-097655dcfbda?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2447&q=80"
+  bg,
 );
 
-const coef = 0.6;
+const coef = 1;
 
 const cylinder = new THREE.Mesh(
-  new THREE.CylinderGeometry(1.2, 1.2, 1.2, 10, 1, true),
+  new THREE.CylinderGeometry(2 * coef, 2 * coef, 1 * coef, 32, 1, true),
   new THREE.MeshBasicMaterial({ map: textureCylinder, side: THREE.DoubleSide })
 );
 
