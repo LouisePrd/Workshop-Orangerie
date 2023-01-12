@@ -29,15 +29,21 @@ function checkField() {
   if (inFiled && !activate) {
     activate = true;
     setTimeout(() => {
-      buttonStart.scale.set(buttonStart.scale.x + 0.2, buttonStart.scale.y + 0.2, buttonStart.scale.z + 0.2);
+      buttonStart.scale.set(
+        buttonStart.scale.x + 0.2,
+        buttonStart.scale.y + 0.2,
+        buttonStart.scale.z + 0.2
+      );
     }, 500);
   } else if (!inFiled && activate) {
-    buttonStart.scale.set(buttonStart.scale.x - 0.2, buttonStart.scale.y - 0.2, buttonStart.scale.z - 0.2);
+    buttonStart.scale.set(
+      buttonStart.scale.x - 0.2,
+      buttonStart.scale.y - 0.2,
+      buttonStart.scale.z - 0.2
+    );
     activate = false;
   }
 }
-
-
 
 const canvas = document.createElement("canvas");
 
@@ -66,11 +72,13 @@ plane.material.transparent = true;
 plane.position.set(0, 0, -1);
 scene.add(plane);
 
+let planex = plane.position.x;
+let planey = plane.position.y;
+let planez = plane.position.z;
+
 // ADD Cylinder to the scene
 const loader2 = new THREE.TextureLoader();
-const textureCylinder = loader2.load(
-  bg,
-);
+const textureCylinder = loader2.load(bg);
 
 const coef = 1;
 
@@ -79,7 +87,9 @@ const cylinder = new THREE.Mesh(
   new THREE.MeshBasicMaterial({ map: textureCylinder, side: THREE.BackSide })
 );
 
-function start() {
+function start(x, y, z) {
+  cylinder.scale.set(plane.scale.x, plane.scale.y * 1.2 , plane.scale.z);
+  cylinder.position.set(x, y, z);
   scene.add(cylinder);
   started = false;
 } // create cylinder
@@ -103,11 +113,9 @@ const materialButton = new THREE.MeshBasicMaterial({
   side: THREE.DoubleSide,
 });
 const buttonStart = new THREE.Mesh(buttonCircle, materialButton);
-buttonStart.position.set(0, 0, -0.6);
+buttonStart.position.set(planex, planey, -1);
 buttonStart.rotation.y = -0.6;
-const textureCircle = loader2.load(
-  textureBtn,
-);
+const textureCircle = loader2.load(textureBtn);
 buttonStart.material.map = textureCircle;
 buttonStart.scale.set(0.4, 0.4, 0.4);
 scene.add(buttonStart);
@@ -121,30 +129,24 @@ const interactionManager = new InteractionManager(
 // Interaction manager -> import which manages click
 interactionManager.add(plane);
 plane.addEventListener("click", (event) => {
-  alert("click");
-  start();
-  removebutton();
+  // removebutton();
   pinchActivate = false;
+  start(plane.position.x, plane.position.y, plane.position.z);
 });
 
-interactionManager.add(buttonStart);
-buttonStart.addEventListener("click", (event) => {
-  triggerArticle(article);
-});
-
-// hdesactivate dragcontrols
+// desactivate dragcontrols
 function removebutton() {
-  controls.deactivate();
+  // controls.deactivate();
 }
 
-// Drag controls
-const controls = new DragControls(dragObjetcs, camera, renderer.domElement);
-controls.addEventListener("dragstart", function (event) {
-  event.object.material.emissive.set(0xaaaaaa);
-});
-controls.addEventListener("dragend", function (event) {
-  event.object.material.emissive.set(0x000000);
-});
+// // Drag controls
+// const controls = new DragControls(dragObjetcs, camera, renderer.domElement);
+// controls.addEventListener("dragstart", function (event) {
+//   event.object.material.emissive.set(0xaaaaaa);
+// });
+// controls.addEventListener("dragend", function (event) {
+//   event.object.material.emissive.set(0x000000);
+// });
 
 // Pinch to resize
 window.addEventListener(

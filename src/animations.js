@@ -14,22 +14,22 @@ window.addEventListener('DOMContentLoaded', (event) => {
     var article5 = document.getElementById("lesBiches");
 
     // ===== Introduction animation =====
-    appear(intro1);
-    setTimeout(() => {
-        disappear(intro1);
-      }, 4000)
-    setTimeout(() => {
-        appear(intro2);
-    }, 5600)
-    setTimeout(() => {
-        disappear(intro2);
-    }, 8000)
-    setTimeout(() => {
-        appear(intro3);
-    }, 9000)
-    setTimeout(() => {
-        start.style.letterSpacing = "4px";
-    }, 9000)
+    // appear(intro1);
+    // setTimeout(() => {
+    //     disappear(intro1);
+    //   }, 4000)
+    // setTimeout(() => {
+    //     appear(intro2);
+    // }, 5600)
+    // setTimeout(() => {
+    //     disappear(intro2);
+    // }, 8000)
+    // setTimeout(() => {
+    //     appear(intro3);
+    // }, 9000)
+    // setTimeout(() => {
+    //     start.style.letterSpacing = "4px";
+    // }, 9000)
 });
 
 
