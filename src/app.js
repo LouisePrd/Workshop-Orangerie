@@ -76,7 +76,7 @@ const coef = 1;
 
 const cylinder = new THREE.Mesh(
   new THREE.CylinderGeometry(2 * coef, 2 * coef, 1 * coef, 32, 1, true),
-  new THREE.MeshBasicMaterial({ map: textureCylinder, side: THREE.DoubleSide })
+  new THREE.MeshBasicMaterial({ map: textureCylinder, side: THREE.BackSide })
 );
 
 function start() {
@@ -103,7 +103,8 @@ const materialButton = new THREE.MeshBasicMaterial({
   side: THREE.DoubleSide,
 });
 const buttonStart = new THREE.Mesh(buttonCircle, materialButton);
-buttonStart.position.set(1, 0, -1);
+buttonStart.position.set(0, 0, -0.6);
+buttonStart.rotation.y = -0.6;
 const textureCircle = loader2.load(
   textureBtn,
 );
@@ -131,9 +132,8 @@ buttonStart.addEventListener("click", (event) => {
   alert("start button");
 });
 
-// hide button, desactivate dragcontrols
+// hdesactivate dragcontrols
 function removebutton() {
-  buttonStart.visible = false;
   controls.deactivate();
 }
 
