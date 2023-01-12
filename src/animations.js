@@ -33,13 +33,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
     // }, 9000)
 
     // ===== Articles animation =====
-
-    back.addEventListener("click", (event) => {
-        for(let i=0; i < allArticles.length; i++) {
-            console.log(allArticles[i]) 
-            allArticles[i].style.display = "none";
-        }
-      });
 });
 
 // ===== FUNCTIONS =====
@@ -57,4 +50,7 @@ function disappear(target) {
 
 function triggerArticle(article) {
     article.style.display = "block";
+    setTimeout(() => {
+    article.style.top = "0";
+    }, 100);
 }

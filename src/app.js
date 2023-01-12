@@ -19,13 +19,29 @@ let article3 = document.getElementById("feminisme");
 let article4 = document.getElementById("artiste");
 let article5 = document.getElementById("lesBiches");
 
+back.addEventListener("click", (event) => {
+  article1.style.top = "120vh";
+  article2.style.top = "120vh";
+  article3.style.top = "120vh";
+  article4.style.top = "120vh";
+  article5.style.top = "120vh";
+
+  setTimeout(() => {
+    article1.style.display = "none";
+    article2.style.display = "none";
+    article3.style.display = "none";
+    article4.style.display = "none";
+    article5.style.display = "none";
+  }, 2000);
+});
+
 document.getElementById("buttonStart").onclick = async () => {
   await activateXR();
   started = true;
 
   // À mettre au trigger de chaque bouton correspondant
   // ----- Article #1 Cubisme
-  // triggerArticle(article1);
+  triggerArticle(article1);
 
   // ----- Page #2 Nymphisme
   // triggerArticle(article2);
