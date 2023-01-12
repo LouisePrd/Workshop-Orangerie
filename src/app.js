@@ -38,25 +38,6 @@ back.addEventListener("click", (event) => {
 document.getElementById("buttonStart").onclick = async () => {
   await activateXR();
   started = true;
-<<<<<<< HEAD
-=======
-
-  // À mettre au trigger de chaque bouton correspondant
-  // ----- Article #1 Cubisme
-  triggerArticle(article1);
-
-  // ----- Page #2 Nymphisme
-  // triggerArticle(article2);
-
-  // ----- Page #3 Féminisme
-  // triggerArticle(article3);
-
-  // ----- Page #4 Artiste
-  // triggerArticle(article4);
-  
-  // ----- Page #5 Les Biches
-  // triggerArticle(article5);
->>>>>>> 812b257f23314e66dd1375533704ab08f8daf63a
 };
 
 let activate = false;
