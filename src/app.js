@@ -30,7 +30,6 @@ function onWindowResize() {
 
 const scene = new THREE.Scene();
 
-<<<<<<< HEAD
 const materials = [
   new THREE.MeshBasicMaterial({ color: 0xff0000 }),
   new THREE.MeshBasicMaterial({ color: 0x0000ff }),
@@ -39,10 +38,7 @@ const materials = [
   new THREE.MeshBasicMaterial({ color: 0x00ffff }),
   new THREE.MeshBasicMaterial({ color: 0xffff00 }),
 ];
-=======
-const axesHelper = new THREE.AxesHelper(5);
-scene.add(axesHelper);
->>>>>>> 66755f105c4d805d868e83d4b834ee9d47ba3367
+
 
 // Add rectangle to the scene to set the painting
 const geometryPlane = new THREE.PlaneGeometry(0.62, 0.43);
@@ -214,85 +210,3 @@ async function activateXR() {
   };
   session.requestAnimationFrame(onXRFrame);
 }
-<<<<<<< HEAD
-
-function main() {
-  const canvas = document.querySelector("#c");
-  const renderer = new THREE.WebGLRenderer({ canvas });
-
-  const fov = 75;
-  const aspect = 2;
-  const near = 1.1;
-  const far = 50;
-  const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-  camera.position.z = 7;
-
-  const controls = new OrbitControls(camera, canvas);
-  controls.target.set(0, 0, 0);
-  controls.update();
-
-  const scene = new THREE.Scene();
-  {
-    const color = 0xffffff;
-    const intensity = 1;
-    const light = new THREE.DirectionalLight(color, intensity);
-    light.position.set(-1, 2, 4);
-    scene.add(light);
-  }
-
-  // Create cube
-  const geometry = new THREE.PlaneGeometry(1, 0.8);
-  const labelContainerElem = document.querySelector("#labels");
-  const material = new THREE.MeshPhongMaterial({ color: 0x44aa88 });
-  const cube = new THREE.Mesh(geometry, material);
-  scene.add(cube);
-  cube.position.x = 0;
-
-  const elem = document.createElement("div");
-  elem.textContent = "Start";
-  labelContainerElem.appendChild(elem);
-
-  let cubes = { cube, elem };
-
-  const tempV = new THREE.Vector3();
-
-  function render(time) {
-    time *= 0.001;
-
-    const { cube, elem } = cubes;
-
-    // get the position of the center of the cube
-    cube.updateWorldMatrix(true, false);
-    cube.getWorldPosition(tempV);
-
-    tempV.project(camera);
-
-    // convert the normalized position to CSS coordinates
-    const x = (tempV.x * 0.5 + 0.5) * canvas.clientWidth;
-    const y = (tempV.y * -0.5 + 0.5) * canvas.clientHeight;
-
-    // move the elem to that position
-    elem.style.transform = `translate(-50%, -50%) translate(${x}px,${y}px)`;
-
-    renderer.render(scene, camera);
-
-    requestAnimationFrame(render);
-  }
-
-  requestAnimationFrame(render);
-
-  // const interactionManager = new InteractionManager(
-  //   renderer,
-  //   camera,
-  //   renderer.domElement
-  // );
-
-  // interactionManager.add(cubes.cube);
-  // cubes.cube.addEventListener("click", (event) => {
-  //   alert("click");
-  // });
-}
-
-main();
-=======
->>>>>>> 66755f105c4d805d868e83d4b834ee9d47ba3367
