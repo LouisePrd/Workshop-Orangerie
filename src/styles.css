@@ -25,14 +25,20 @@
   src: url("/src/fonts/SuisseIntl-Bold.ttf");
   font-weight: bold;
 }
+@font-face {
+  font-family: "Abril_Display";
+  src: url("/src/fonts/Abril_Display_Regular.otf");
+}
 
 /* ===== GENERAL ===== */ 
 
 :root {
+  --intro:#397163;
   --main:#FFFEF3;
   --dark:black;
   --title: 'ZapfHumanist601BT-Roman';
   --text: 'SuisseIntl-Regular';
+  --fading:1.7s ease-in-out;
 }
 
 body {
@@ -51,9 +57,110 @@ h1, h2, h3 {
   font-family: var(--title);
 }
 
+/* ===== INTRODUCTION ===== */ 
+
+#introduction {
+  position:absolute;
+  top:0;
+  left:0;
+  padding-top:2vh;
+  width:100vw;
+  height:100vh;
+  overflow-x: hidden;
+  color:var(--main);
+  background-color:var(--intro);
+  font-family: 'Abril_Display';
+}
+
+#introduction p {
+  padding:0 15vw;
+  line-height: 1.7;
+}
+
+/* ===== Intro 1 ===== */ 
+
+#intro1 {
+  position:absolute;
+  top:0;
+  left:0;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height:100vh;
+  text-align: center;
+  font-size:1rem;
+  transition:var(--fading);
+  opacity:0;
+} 
+
+#intro1 span {
+  font-style:italic;
+}
+
+#intro1 img {
+  padding:4.5vh 0;
+  width:23vw;
+}
+
+/* ===== Intro 2 ===== */ 
+
+#intro2 {
+  position:absolute;
+  top:0;
+  left:0;
+  display:flex;
+  height:100vh;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  transition:var(--fading);
+  opacity:0;
+}
+
+.instruction {
+  display:flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+#view {
+  width:43vw;
+}
+
+#phone {
+  width:21vw;
+}
+
+/* ===== Intro 2 ===== */ 
+
+#intro3 {
+  display:flex;
+  height:100vh;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transition:var(--fading);
+  opacity:0;
+}
+
+#intro3 button {
+  padding:3vw 5vw;
+  border:1px solid var(--main);
+  border-radius: 0;
+  color:var(--main);
+  background:none;
+  font-family: 'Abril_Display';
+  font-size:1.2rem;
+  transition:1.5s ease-in;
+  letter-spacing: -1px;
+}
+
 /* ======= ARTICLES ======= */ 
 
 .article {
+  display:none;
   position:absolute;
   top:0;
   left:0;
@@ -192,6 +299,10 @@ hr {
 }
 
 /* -- Specificities -- */
+
+/* #artiste {
+  display: block;
+} */
 
 #cubisme .thirdPage {
   background: url('/src/assets/ml-cubisme.png') center no-repeat;

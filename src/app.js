@@ -129,7 +129,7 @@ plane.addEventListener("click", (event) => {
 
 interactionManager.add(buttonStart);
 buttonStart.addEventListener("click", (event) => {
-  alert("start button");
+  triggerArticle(article);
 });
 
 // hdesactivate dragcontrols
