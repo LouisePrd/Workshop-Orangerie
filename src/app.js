@@ -28,15 +28,6 @@ const scene = new THREE.Scene();
 const axesHelper = new THREE.AxesHelper(5);
 scene.add(axesHelper);
 
-const materials = [
-  new THREE.MeshBasicMaterial({ color: 0xff0000 }),
-  new THREE.MeshBasicMaterial({ color: 0x0000ff }),
-  new THREE.MeshBasicMaterial({ color: 0x00ff00 }),
-  new THREE.MeshBasicMaterial({ color: 0xff00ff }),
-  new THREE.MeshBasicMaterial({ color: 0x00ffff }),
-  new THREE.MeshBasicMaterial({ color: 0xffff00 }),
-];
-
 // Add rectangle to the scene to set the painting
 const geometryPlane = new THREE.PlaneGeometry(0.62, 0.43);
 const materialPlane = new THREE.MeshBasicMaterial({
@@ -149,6 +140,29 @@ window.addEventListener(
   false
 );
 
+// Returne true if object is in the camera field
+function isInFieldOfCamera(object) {
+  let frustum = new THREE.Frustum();
+  let projScreenMatrix = new THREE.Matrix4();
+  projScreenMatrix.multiplyMatrices(
+    camera.projectionMatrix,
+    camera.matrixWorldInverse
+  );
+
+  // frustum.setFromProjectionMatrix(camera.projectionMatrix);
+  frustum.setFromProjectionMatrix(
+    new THREE.Matrix4().multiplyMatrices(
+      camera.projectionMatrix,
+      camera.matrixWorldInverse
+    )
+  );
+
+  object.updateMatrix(); // make sure plane's local matrix is updated
+  object.updateMatrixWorld();
+
+  return frustum.intersectsObject(object);
+}
+
 async function activateXR() {
   const session = await navigator.xr.requestSession("immersive-ar");
   session.updateRenderState({
@@ -167,6 +181,7 @@ async function activateXR() {
       session.renderState.baseLayer.framebuffer
     );
 
+ 
     const pose = frame.getViewerPose(referenceSpace);
 
     if (pose) {
