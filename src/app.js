@@ -1,7 +1,11 @@
 import * as THREE from "three";
-import { AxesHelper } from "three";
 import { DragControls } from "three/examples/jsm/controls/DragControls.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+import {
+  CSS2DRenderer,
+  CSS2DObject,
+} from "three/examples/jsm/renderers/CSS2DRenderer.js";
+import { InteractionManager } from "three.interactive";
 
 let started = false;
 let pinchActivate = true;
@@ -12,6 +16,7 @@ document.getElementById("buttonStart").onclick = async () => {
 };
 
 const canvas = document.createElement("canvas");
+
 document.body.appendChild(canvas);
 const gl = canvas.getContext("webgl", { xrCompatible: true });
 
@@ -24,9 +29,6 @@ function onWindowResize() {
 }
 
 const scene = new THREE.Scene();
-
-const axesHelper = new THREE.AxesHelper(5);
-scene.add(axesHelper);
 
 const materials = [
   new THREE.MeshBasicMaterial({ color: 0xff0000 }),
@@ -90,30 +92,21 @@ const materialButton = new THREE.MeshBasicMaterial({
 const buttonStart = new THREE.Mesh(button, materialButton);
 scene.add(camera);
 camera.add(buttonStart);
-buttonStart.position.set(0, -0.7, -1);
+buttonStart.position.set(0, -0.5, -1);
 
-// get position buttonstart screen
-let widthHalf = window.innerWidth / 2;
-let heightHalf = window.innerHeight / 2;
+const interactionManager = new InteractionManager(
+  renderer,
+  camera,
+  renderer.domElement
+);
 
-window.addEventListener("touchend", function (e) {
-  if (started) {
-    let x = e.changedTouches[0].clientX;
-    let y = e.changedTouches[0].clientY;
-    let centreX = buttonStart.position.x * widthHalf + widthHalf;
-    let centreY = -(buttonStart.position.y * heightHalf) + heightHalf;
-
-    if (
-      x > centreX - 80 &&
-      x < centreX + 80 &&
-      y > centreY + 30 &&
-      y < centreY + 90
-    ) {
-      start();
-      removebutton();
-      pinchActivate = false;
-    }
-  }
+// Interaction manager -> import which manages click
+interactionManager.add(plane);
+plane.addEventListener("click", (event) => {
+  alert("click");
+  start();
+  removebutton();
+  pinchActivate = false;
 });
 
 // hide button, desactivate dragcontrols
@@ -188,13 +181,86 @@ async function activateXR() {
       };
 
       render();
-
-      // ancienne loop (au cas où hihi)
-      // renderer.setAnimationLoop(function () {
-      //   orbitControls.update();
-      //   renderer.render(scene, camera);
-      // });
     }
   };
   session.requestAnimationFrame(onXRFrame);
 }
+
+function main() {
+  const canvas = document.querySelector("#c");
+  const renderer = new THREE.WebGLRenderer({ canvas });
+
+  const fov = 75;
+  const aspect = 2;
+  const near = 1.1;
+  const far = 50;
+  const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
+  camera.position.z = 7;
+
+  const controls = new OrbitControls(camera, canvas);
+  controls.target.set(0, 0, 0);
+  controls.update();
+
+  const scene = new THREE.Scene();
+  {
+    const color = 0xffffff;
+    const intensity = 1;
+    const light = new THREE.DirectionalLight(color, intensity);
+    light.position.set(-1, 2, 4);
+    scene.add(light);
+  }
+
+  // Create cube
+  const geometry = new THREE.PlaneGeometry(1, 0.8);
+  const labelContainerElem = document.querySelector("#labels");
+  const material = new THREE.MeshPhongMaterial({ color: 0x44aa88 });
+  const cube = new THREE.Mesh(geometry, material);
+  scene.add(cube);
+  cube.position.x = 0;
+
+  const elem = document.createElement("div");
+  elem.textContent = "Start";
+  labelContainerElem.appendChild(elem);
+
+  let cubes = { cube, elem };
+
+  const tempV = new THREE.Vector3();
+
+  function render(time) {
+    time *= 0.001;
+
+    const { cube, elem } = cubes;
+
+    // get the position of the center of the cube
+    cube.updateWorldMatrix(true, false);
+    cube.getWorldPosition(tempV);
+
+    tempV.project(camera);
+
+    // convert the normalized position to CSS coordinates
+    const x = (tempV.x * 0.5 + 0.5) * canvas.clientWidth;
+    const y = (tempV.y * -0.5 + 0.5) * canvas.clientHeight;
+
+    // move the elem to that position
+    elem.style.transform = `translate(-50%, -50%) translate(${x}px,${y}px)`;
+
+    renderer.render(scene, camera);
+
+    requestAnimationFrame(render);
+  }
+
+  requestAnimationFrame(render);
+
+  // const interactionManager = new InteractionManager(
+  //   renderer,
+  //   camera,
+  //   renderer.domElement
+  // );
+
+  // interactionManager.add(cubes.cube);
+  // cubes.cube.addEventListener("click", (event) => {
+  //   alert("click");
+  // });
+}
+
+main();
