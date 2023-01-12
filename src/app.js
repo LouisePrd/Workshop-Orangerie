@@ -6,6 +6,7 @@ import { XRControllerModelFactory } from "three/examples/jsm/webxr/XRControllerM
 import { XRHandModelFactory } from "three/examples/jsm/webxr/XRHandModelFactory.js";
 // marri
 import bg from "./assets/bg.jpg";
+import textureBtn from "./assets/discover.png";
 
 let started = false;
 let pinchActivate = true;
@@ -25,8 +26,7 @@ function checkField() {
     inFiled = false;
   }
 
-  if (inFiled && !activate) { 
-    alert("in field");
+  if (inFiled && !activate) {
     activate = true;
     setTimeout(() => {
       buttonStart.scale.set(buttonStart.scale.x + 0.2, buttonStart.scale.y + 0.2, buttonStart.scale.z + 0.2);
@@ -35,8 +35,6 @@ function checkField() {
     buttonStart.scale.set(buttonStart.scale.x - 0.2, buttonStart.scale.y - 0.2, buttonStart.scale.z - 0.2);
     activate = false;
   }
-
-
 }
 
 
@@ -105,12 +103,12 @@ const materialButton = new THREE.MeshBasicMaterial({
   side: THREE.DoubleSide,
 });
 const buttonStart = new THREE.Mesh(buttonCircle, materialButton);
-buttonStart.position.set(1.5, -0.5, -1);
+buttonStart.position.set(1, 0, -1);
 const textureCircle = loader2.load(
-  "https://images.unsplash.com/photo-1581544291234-31340be4b1b8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTZ8fHRleHR8ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60"
+  textureBtn,
 );
 buttonStart.material.map = textureCircle;
-buttonStart.scale.set(0.3, 0.3, 0.3);
+buttonStart.scale.set(0.4, 0.4, 0.4);
 scene.add(buttonStart);
 
 const interactionManager = new InteractionManager(
@@ -126,6 +124,11 @@ plane.addEventListener("click", (event) => {
   start();
   removebutton();
   pinchActivate = false;
+});
+
+interactionManager.add(buttonStart);
+buttonStart.addEventListener("click", (event) => {
+  alert("start button");
 });
 
 // hide button, desactivate dragcontrols
