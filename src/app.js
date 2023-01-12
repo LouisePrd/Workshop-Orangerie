@@ -4,6 +4,7 @@ import { DragControls } from "three/examples/jsm/controls/DragControls.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 
 let started = false;
+let pinchActivate = true;
 
 document.getElementById("buttonStart").onclick = async () => {
   await activateXR();
@@ -57,7 +58,7 @@ const textureCylinder = loader2.load(
 const coef = 0.6;
 
 const cylinder = new THREE.Mesh(
-  new THREE.CylinderGeometry(1.26 * coef, 1.26 * coef, .1 * coef, 32, 1, true),
+  new THREE.CylinderGeometry(1.2, 1.2, 1.2, 10, 1, true),
   new THREE.MeshBasicMaterial({ map: textureCylinder, side: THREE.DoubleSide })
 );
 
@@ -108,17 +109,17 @@ window.addEventListener("touchend", function (e) {
       y > centreY + 30 &&
       y < centreY + 90
     ) {
-      alert("yaaay");
-      // start();
+      start();
       removebutton();
+      pinchActivate = false;
     }
   }
 });
 
+// hide button, desactivate dragcontrols
 function removebutton() {
-  scene.remove(buttonStart);
-  buttonStart.geometry.dispose();
-  buttonStart.material.dispose();
+  buttonStart.visible = false;
+  controls.deactivate();
 }
 
 // Drag controls
@@ -134,13 +135,15 @@ controls.addEventListener("dragend", function (event) {
 window.addEventListener(
   "gestureend",
   function (e) {
-    let x = plane.scale.x;
-    let y = plane.scale.y;
-    let z = plane.scale.z;
-    if (e.scale < 1.0) {
-      plane.scale.set(x - 0.1, y - 0.1, z - 0.1);
-    } else if (e.scale > 1.0) {
-      plane.scale.set(x + 0.1, y + 0.1, z + 0.1);
+    if (pinchActivate) {
+      let x = plane.scale.x;
+      let y = plane.scale.y;
+      let z = plane.scale.z;
+      if (e.scale < 1.0) {
+        plane.scale.set(x - 0.1, y - 0.1, z - 0.1);
+      } else if (e.scale > 1.0) {
+        plane.scale.set(x + 0.1, y + 0.1, z + 0.1);
+      }
     }
   },
   false
