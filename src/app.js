@@ -19,16 +19,6 @@ let article3 = document.getElementById("feminisme");
 let article4 = document.getElementById("artiste");
 let article5 = document.getElementById("lesBiches");
 
-back.addEventListener("click", (event) => {
-  for(let i = 1; i < 4; i++) {
-    let target = "article" + i;
-    target.style.top = "120vh";
-  setTimeout(() => {
-    target.style.display = "none";
-  }, 2000);
-  }
-});
-
 document.getElementById("buttonStart").onclick = async () => {
   await activateXR();
   started = true;
@@ -137,25 +127,25 @@ btnFirstArticle.rotation.y = -0.8;
 const textureCircle = loader2.load(textureBtn);
 createCircle(btnFirstArticle);
 
-// const btnSecondArticle = new THREE.Mesh(buttonCircle, materialButton);
-// btnSecondArticle.position.set(planex + 2, planey, -0.8);
-// btnSecondArticle.rotation.y = -0.8;
-// createCircle(btnSecondArticle);
+const btnSecondArticle = new THREE.Mesh(buttonCircle, materialButton);
+btnSecondArticle.position.set(planex + 2, planey, -0.8);
+btnSecondArticle.rotation.y = -0.8;
+createCircle(btnSecondArticle);
 
-// const btnThirdArticle = new THREE.Mesh(buttonCircle, materialButton);
-// btnThirdArticle.position.set(planex + 2.5, planey, -0.8);
-// btnThirdArticle.rotation.y = -0.8;
-// createCircle(btnThirdArticle);
+const btnThirdArticle = new THREE.Mesh(buttonCircle, materialButton);
+btnThirdArticle.position.set(planex + 2.5, planey, -0.8);
+btnThirdArticle.rotation.y = -0.8;
+createCircle(btnThirdArticle);
 
-// const btnFourthArticle = new THREE.Mesh(buttonCircle, materialButton);
-// btnFourthArticle.position.set(planex + 3, planey, -1.8);
-// btnFourthArticle.rotation.y = -0.8;
-// createCircle(btnFourthArticle);
+const btnFourthArticle = new THREE.Mesh(buttonCircle, materialButton);
+btnFourthArticle.position.set(planex + 3, planey, -1.8);
+btnFourthArticle.rotation.y = -0.8;
+createCircle(btnFourthArticle);
 
-// const btnFifthArticle = new THREE.Mesh(buttonCircle, materialButton);
-// btnFifthArticle.position.set(planex + 3.5, planey, 0);
-// btnFifthArticle.rotation.y = -0.8;
-// createCircle(btnFifthArticle);
+const btnFifthArticle = new THREE.Mesh(buttonCircle, materialButton);
+btnFifthArticle.position.set(planex + 3.5, planey, 0);
+btnFifthArticle.rotation.y = -0.8;
+createCircle(btnFifthArticle);
 
 function createCircle(mesh) {
   mesh.material.map = textureCircle;
