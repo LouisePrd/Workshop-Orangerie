@@ -1,20 +1,45 @@
 import * as THREE from "three";
 import { DragControls } from "three/examples/jsm/controls/DragControls.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-import {
-  CSS2DRenderer,
-  CSS2DObject,
-} from "three/examples/jsm/renderers/CSS2DRenderer.js";
 import { InteractionManager } from "three.interactive";
+import { XRControllerModelFactory } from "three/examples/jsm/webxr/XRControllerModelFactory.js";
+import { XRHandModelFactory } from "three/examples/jsm/webxr/XRHandModelFactory.js";
+// marri
 import bg from "./assets/bg.jpg";
 
 let started = false;
 let pinchActivate = true;
+let inFiled = false;
 
 document.getElementById("buttonStart").onclick = async () => {
   await activateXR();
   started = true;
 };
+
+let activate = false;
+
+function checkField() {
+  if (isInFieldOfCamera(buttonStart)) {
+    inFiled = true;
+  } else {
+    inFiled = false;
+  }
+
+  if (inFiled && !activate) { 
+    alert("in field");
+    activate = true;
+    setTimeout(() => {
+      buttonStart.scale.set(buttonStart.scale.x + 0.2, buttonStart.scale.y + 0.2, buttonStart.scale.z + 0.2);
+    }, 500);
+  } else if (!inFiled && activate) {
+    buttonStart.scale.set(buttonStart.scale.x - 0.2, buttonStart.scale.y - 0.2, buttonStart.scale.z - 0.2);
+    activate = false;
+  }
+
+
+}
+
+
 
 const canvas = document.createElement("canvas");
 
@@ -75,16 +100,18 @@ renderer.autoClear = false;
 const camera = new THREE.PerspectiveCamera();
 camera.matrixAutoUpdate = false;
 
-// Add button start fixed
-const button = new THREE.PlaneGeometry(0.25, 0.2);
+const buttonCircle = new THREE.CircleGeometry(0.25, 32);
 const materialButton = new THREE.MeshBasicMaterial({
-  color: 689582,
   side: THREE.DoubleSide,
 });
-const buttonStart = new THREE.Mesh(button, materialButton);
-scene.add(camera);
-camera.add(buttonStart);
-buttonStart.position.set(0, -0.5, -1);
+const buttonStart = new THREE.Mesh(buttonCircle, materialButton);
+buttonStart.position.set(1.5, -0.5, -1);
+const textureCircle = loader2.load(
+  "https://images.unsplash.com/photo-1581544291234-31340be4b1b8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTZ8fHRleHR8ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60"
+);
+buttonStart.material.map = textureCircle;
+buttonStart.scale.set(0.3, 0.3, 0.3);
+scene.add(buttonStart);
 
 const interactionManager = new InteractionManager(
   renderer,
@@ -134,7 +161,7 @@ window.addEventListener(
   false
 );
 
-// Returne true if object is in the camera field
+// Return true if object is in the camera field
 function isInFieldOfCamera(object) {
   let frustum = new THREE.Frustum();
   let projScreenMatrix = new THREE.Matrix4();
@@ -175,7 +202,6 @@ async function activateXR() {
       session.renderState.baseLayer.framebuffer
     );
 
- 
     const pose = frame.getViewerPose(referenceSpace);
 
     if (pose) {
@@ -194,6 +220,7 @@ async function activateXR() {
       var render = function () {
         renderer.render(scene, camera);
         requestAnimationFrame(render);
+        checkField();
       };
 
       render();
