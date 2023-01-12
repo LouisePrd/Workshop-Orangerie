@@ -129,8 +129,7 @@ plane.addEventListener("click", (event) => {
 
 interactionManager.add(buttonStart);
 buttonStart.addEventListener("click", (event) => {
-  document.getElementById("cubisme").style.display = "block";
-  triggerArticle(article1);
+  triggerArticle(article);
 });
 
 // hdesactivate dragcontrols
