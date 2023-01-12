@@ -20,19 +20,13 @@ let article4 = document.getElementById("artiste");
 let article5 = document.getElementById("lesBiches");
 
 back.addEventListener("click", (event) => {
-  article1.style.top = "120vh";
-  article2.style.top = "120vh";
-  article3.style.top = "120vh";
-  article4.style.top = "120vh";
-  article5.style.top = "120vh";
-
+  for(let i = 1; i < 4; i++) {
+    let target = "article" + i;
+    target.style.top = "120vh";
   setTimeout(() => {
-    article1.style.display = "none";
-    article2.style.display = "none";
-    article3.style.display = "none";
-    article4.style.display = "none";
-    article5.style.display = "none";
+    target.style.display = "none";
   }, 2000);
+  }
 });
 
 document.getElementById("buttonStart").onclick = async () => {
@@ -41,7 +35,7 @@ document.getElementById("buttonStart").onclick = async () => {
 
   // À mettre au trigger de chaque bouton correspondant
   // ----- Article #1 Cubisme
-  triggerArticle(article1);
+  // triggerArticle(article1);
 
   // ----- Page #2 Nymphisme
   // triggerArticle(article2);
@@ -50,7 +44,7 @@ document.getElementById("buttonStart").onclick = async () => {
   // triggerArticle(article3);
 
   // ----- Page #4 Artiste
-  // triggerArticle(article4);
+  triggerArticle(article4);
   
   // ----- Page #5 Les Biches
   // triggerArticle(article5);
