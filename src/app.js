@@ -10,7 +10,6 @@ import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 
 // marri
 import bg from "./assets/bg.jpg";
-import textureBtn from "./assets/discover.png";
 
 let started = false;
 let pinchActivate = true;
@@ -28,32 +27,8 @@ document.getElementById("buttonStart").onclick = async () => {
   started = true;
 };
 
-let activate = false;
-
 function checkField() {
-  if (isInFieldOfCamera(btnFirstArticle)) {
-    inFiled = true;
-  } else {
-    inFiled = false;
-  }
 
-  if (inFiled && !activate) {
-    activate = true;
-    setTimeout(() => {
-      btnFirstArticle.scale.set(
-        btnFirstArticle.scale.x + 0.2,
-        btnFirstArticle.scale.y + 0.2,
-        btnFirstArticle.scale.z + 0.2
-      );
-    }, 500);
-  } else if (!inFiled && activate) {
-    btnFirstArticle.scale.set(
-      btnFirstArticle.scale.x - 0.2,
-      btnFirstArticle.scale.y - 0.2,
-      btnFirstArticle.scale.z - 0.2
-    );
-    activate = false;
-  }
 }
 
 const canvas = document.createElement("canvas");
@@ -125,38 +100,65 @@ renderer.autoClear = false;
 const camera = new THREE.PerspectiveCamera();
 camera.matrixAutoUpdate = false;
 
-const buttonCircle = new THREE.CircleGeometry(0.06, 32);
-const buttonCircleFirst = new THREE.CircleGeometry(0.05, 32);
+const buttonCircleFirst = new THREE.TorusGeometry(0.05, 0.005, 16, 100);
+const buttonCircleFirst2 = new THREE.TorusGeometry(0.07, 0.003, 16, 100);
+const buttonCircle = new THREE.TorusGeometry(0.06, 0.005, 16, 100);
+const buttonCircle2 = new THREE.TorusGeometry(0.08, 0.003, 16, 100);
 const materialButton = new THREE.MeshBasicMaterial({
   side: THREE.DoubleSide,
 });
 const btnFirstArticle = new THREE.Mesh(buttonCircleFirst, materialButton);
+const btnFirstArticle2 = new THREE.Mesh(buttonCircleFirst2, materialButton);
 btnFirstArticle.position.set(planex + 0.05, planey - 0.08, planez - 0.8);
-const textureCircle = loader2.load(textureBtn);
+btnFirstArticle2.position.set(planex + 0.05, planey - 0.08, planez - 0.8);
 createCircle(btnFirstArticle);
+createCircle(btnFirstArticle2);
 
 const btnSecondArticle = new THREE.Mesh(buttonCircle, materialButton);
+const btnSecondArticle2 = new THREE.Mesh(buttonCircle2, materialButton);
 btnSecondArticle.position.set(planex + 1.6, planey + 0.08, planez - 0.6);
+btnSecondArticle2.position.set(planex + 1.6, planey + 0.08, planez - 0.6);
 btnSecondArticle.rotation.y = -1.2;
+btnSecondArticle2.rotation.y = -1.2;
 createCircle(btnSecondArticle);
+createCircle(btnSecondArticle2);
 
 const btnThirdArticle = new THREE.Mesh(buttonCircle, materialButton);
+const btnThirdArticle2 = new THREE.Mesh(buttonCircle2, materialButton);
 btnThirdArticle.position.set(planex + 1.5, planey + 0.1, -0.3);
+btnThirdArticle2.position.set(planex + 1.5, planey + 0.1, -0.3);
 btnThirdArticle.rotation.y = -1.7;
-createCircle(btnThirdArticle);
+btnThirdArticle2.rotation.y = -1.7;
+// createCircle(btnThirdArticle);
+// createCircle(btnThirdArticle2);
 
 const btnFourthArticle = new THREE.Mesh(buttonCircle, materialButton);
+const btnFourthArticle2 = new THREE.Mesh(buttonCircle2, materialButton);
 btnFourthArticle.position.set(planex + 0.6, planey - 0.15, planez + 1.5);
+btnFourthArticle2.position.set(planex + 0.6, planey - 0.15, planez + 1.5);
 btnFourthArticle.rotation.y = -2.8;
-createCircle(btnFourthArticle);
+btnFourthArticle2.rotation.y = -2.8;
+// createCircle(btnFourthArticle);
+// createCircle(btnFourthArticle2);
 
 // const btnFifthArticle = new THREE.Mesh(buttonCircle, materialButton);
 // btnFifthArticle.position.set(planex + 3.5, planey, 0);
 // btnFifthArticle.rotation.y = -0.8;
 // createCircle(btnFifthArticle);
 
+// every 2 secs, change scale of btns
+setInterval(() => {
+  btns.forEach((btn) => {
+    btn.scale.set(btn.scale.x + 0.15, btn.scale.y + 0.15, btn.scale.z + 0.15);
+    setTimeout(() => {
+      btn.scale.set(btn.scale.x - 0.15, btn.scale.y - 0.15, btn.scale.z - 0.15);
+    }, 2000);
+  });
+}, 3000);
+
 function createCircle(mesh) {
-  mesh.material.map = textureCircle;
+  // mesh.material.map = textureCircle;
+  // mesh.material.color.setHex(0xffffff);
   mesh.scale.set(0.8, 0.8, 0.8);
   mesh.material.transparent = true;
   mesh.material.opacity = 0.8;
@@ -165,9 +167,13 @@ function createCircle(mesh) {
 
 const btns = [
   btnFirstArticle,
+  btnFirstArticle2,
   btnSecondArticle,
+  btnSecondArticle2,
   btnThirdArticle,
+  btnThirdArticle2,
   btnFourthArticle,
+  btnFourthArticle2,
 ];
 btns.forEach((btn) => {
   btn.visible = false;
