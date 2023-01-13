@@ -4,6 +4,8 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { InteractionManager } from "three.interactive";
 import { XRControllerModelFactory } from "three/examples/jsm/webxr/XRControllerModelFactory.js";
 import { XRHandModelFactory } from "three/examples/jsm/webxr/XRHandModelFactory.js";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 // marri
 import bg from "./assets/bg.jpg";
 import textureBtn from "./assets/discover.png";
@@ -96,10 +98,12 @@ const cylinder = new THREE.Mesh(
 );
 
 function start(x, y, z) {
-  cylinder.scale.set(-1, plane.scale.y * 1.2 , plane.scale.z);
+  cylinder.scale.set(-1, plane.scale.y * 1.2, plane.scale.z);
   cylinder.position.set(x, y, z);
   scene.add(cylinder);
   started = false;
+  let audio = new Audio("/son/Marie_Laurencin_Audio.mp3");
+  audio.play();
 } // create cylinder
 
 // Tab for Drag Controls
@@ -168,7 +172,6 @@ plane.addEventListener("click", (event) => {
   pinchActivate = false;
   start(plane.position.x, plane.position.y, plane.position.z);
 });
-
 
 // Interactive buttons -> Manage
 interactionManager.add(btnFirstArticle);
@@ -254,6 +257,71 @@ async function activateXR() {
   });
 
   const referenceSpace = await session.requestReferenceSpace("local");
+
+  /**
+   * Models
+   */
+
+  // const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+  // scene.add(ambientLight);
+
+  // const dracoLoader = new DRACOLoader();
+  // dracoLoader.setDecoderPath("/musicBox/draco/");
+
+  // const gltfLoader = new GLTFLoader();
+  // gltfLoader.setDRACOLoader(dracoLoader);
+
+  // gltfLoader.load("/musicBox/models/box1.glb", (glb) => {
+  //   glb.scene.scale.set(0.025, 0.025, 0.025);
+  //   glb.scene.position.z -= 0.5;
+  //   scene.add(glb.scene);
+  // });
+
+  // gltfLoader.load("/musicBox/models/box2.glb", (glb) => {
+  //   glb.scene.scale.set(0.025, 0.025, 0.025);
+  //   // glb.scene.position.x += -1;
+  //   glb.scene.position.y += 0.02;
+  //   glb.scene.position.z -= 0.5;
+  //   glb.scene.rotateX(Math.PI * -0.5);
+  //   glb.scene.rotateY(Math.PI * -0.5);
+  //   scene.add(glb.scene);
+
+  //   session.requestAnimationFrame(animate);
+
+  //   function animate() {
+  //     glb.scene.rotation.x += 0.01;
+  //     if (glb.scene.rotation.x < 0) {
+  //       session.requestAnimationFrame(animate);
+  //     }
+  //   }
+  // });
+
+  // gltfLoader.load("/musicBox/models/danse1.glb", (glb) => {
+  //   glb.scene.scale.set(0.025, 0.025, 0.025);
+
+  //   scene.add(glb.scene);
+  //   glb.scene.position.z -= 0.5;
+  //   session.requestAnimationFrame(animate);
+
+  //   function animate() {
+  //     glb.scene.rotation.y += 0.1;
+  //     session.requestAnimationFrame(animate);
+  //   }
+  // });
+
+  // gltfLoader.load("/musicBox/models/danse2.glb", (glb) => {
+  //   glb.scene.scale.set(0.025, 0.025, 0.025);
+  //   glb.scene.position.z -= 0.5;
+
+  //   scene.add(glb.scene);
+
+  //   session.requestAnimationFrame(animate);
+
+  //   function animate() {
+  //     glb.scene.rotation.y += 0.1;
+  //     session.requestAnimationFrame(animate);
+  //   }
+  // });
 
   // Create a render loop that allows us to draw on the AR view.
   const onXRFrame = (time, frame) => {
