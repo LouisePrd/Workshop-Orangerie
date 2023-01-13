@@ -16,23 +16,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
   let article4 = document.getElementById("artiste");
   let article5 = document.getElementById("lesBiches");
 
-  // back.addEventListener("click", (event) => {
-  //   alert("back");
-  //   article1.style.top = "120vh";
-  //   article2.style.top = "120vh";
-  //   article3.style.top = "120vh";
-  //   article4.style.top = "120vh";
-  //   article5.style.top = "120vh";
-
-  //   setTimeout(() => {
-  //     article1.style.display = "none";
-  //     article2.style.display = "none";
-  //     article3.style.display = "none";
-  //     article4.style.display = "none";
-  //     article5.style.display = "none";
-  //   }, 2000);
-  // });
-
   var back1 = document.getElementById("back1");
   var back2 = document.getElementById("back2");
   var back3 = document.getElementById("back3");
