@@ -1,6 +1,6 @@
 # Workshop-Orangerie
 
-
+Projet fait par groupe de 5 étudiants : 3 développeurs et 2 designers.<br>
 En collaboration avec <a href="https://www.musee-orangerie.fr/fr" target="_blank">le musée de l'Orangerie</a>, <strong>MARI-E</strong>, une expérience en réalité augmentée à 360°<br><br>
 <strong>Démo</strong> : https://youtube.com/shorts/yh_1zn_Y2OQ?feature=share<br>
 <strong>Lien</strong> : https://spectacular-syrniki-bf026e.netlify.app/ (tablette/téléphone only, si IOS : appli XRViewer)<br>
@@ -18,9 +18,9 @@ Des écouteurs sont conseillés pour profiter d'une expérience optimale.
 
 Plongez dans l'univers de Marie Laurencin à travers une expérience en réalité augmentée à 360°: découvrez son histoire, son parcours, ainsi que ses œuvres dans un univers <strong>à mi-chemin entre peinture et intelligence artificielle.</strong>
 
- ## MAQUETTE
- Ce projet a été fait par groupe de 5 étudiants : 3 développeurs et 2 designers. Voilà la maquette :
- https://xd.adobe.com/view/c66c56c5-1d9d-4358-a549-97bc15af8b5e-933f/
+ ## TECHNOS
+
+WebXR, ThreeJS, Parcel
 
  ## RESULTAT
  
