@@ -27,9 +27,7 @@ document.getElementById("buttonStart").onclick = async () => {
   started = true;
 };
 
-function checkField() {
-
-}
+function checkField() {}
 
 const canvas = document.createElement("canvas");
 canvas.attributes.id = "AR";
@@ -147,14 +145,27 @@ btnFourthArticle2.rotation.y = -2.8;
 // createCircle(btnFifthArticle);
 
 // every 2 secs, change scale of btns
-setInterval(() => {
+
+function animBtn() {
   btns.forEach((btn) => {
-    btn.scale.set(btn.scale.x + 0.15, btn.scale.y + 0.15, btn.scale.z + 0.15);
-    setTimeout(() => {
-      btn.scale.set(btn.scale.x - 0.15, btn.scale.y - 0.15, btn.scale.z - 0.15);
-    }, 2000);
+    if (btn.scale.x > 1.15) {
+      btn.scale.set(
+        (btn.scale.x -= 0.01),
+        (btn.scale.y -= 0.01),
+        (btn.scale.z -= 0.01)
+      );
+    } else {
+      btn.scale.set(
+        (btn.scale.x += 0.01),
+        (btn.scale.y += 0.01),
+        (btn.scale.z += 0.01)
+      );
+    }
   });
-}, 3000);
+  requestAnimationFrame(animBtn);
+}
+
+requestAnimationFrame(animBtn);
 
 function createCircle(mesh) {
   // mesh.material.map = textureCircle;
