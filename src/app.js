@@ -249,10 +249,10 @@ btnFourthArticle2.addEventListener("click", (event) => {
   triggerArticle(article4);
   audioBtn.play();
 });
-// interactionManager.add(btnFifthArticle);
-// btnFifthArticle.addEventListener("click", (event) => {
-//   triggerArticle(article5);
-// });
+interactionManager.add(btnFifthArticle);
+btnFifthArticle.addEventListener("click", (event) => {
+  triggerArticle(article5);
+});
 
 // desactivate dragcontrols
 function removebutton() {
