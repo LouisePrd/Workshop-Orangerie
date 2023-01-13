@@ -131,12 +131,12 @@ const materialButton = new THREE.MeshBasicMaterial({
   side: THREE.DoubleSide,
 });
 const btnFirstArticle = new THREE.Mesh(buttonCircleFirst, materialButton);
-btnFirstArticle.position.set(planex + 0.1, planey - 0.08, planez - 0.3);
+btnFirstArticle.position.set(planex + 0.05, planey - 0.08, planez - 0.8);
 const textureCircle = loader2.load(textureBtn);
 createCircle(btnFirstArticle);
 
 const btnSecondArticle = new THREE.Mesh(buttonCircle, materialButton);
-btnSecondArticle.position.set(planex - 0.05, planey + 0.08, planez + 0.3);
+btnSecondArticle.position.set(planex + 1.6, planey + 0.08, planez - 0.6);
 btnSecondArticle.rotation.y = -1.2;
 createCircle(btnSecondArticle);
 
