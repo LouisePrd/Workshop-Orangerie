@@ -4,6 +4,8 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { InteractionManager } from "three.interactive";
 import { XRControllerModelFactory } from "three/examples/jsm/webxr/XRControllerModelFactory.js";
 import { XRHandModelFactory } from "three/examples/jsm/webxr/XRHandModelFactory.js";
+import { AxesHelper } from "three";
+
 // marri
 import bg from "./assets/bg.jpg";
 import textureBtn from "./assets/discover.png";
@@ -67,13 +69,15 @@ function onWindowResize() {
 }
 
 const scene = new THREE.Scene();
+const axesHelper = new THREE.AxesHelper( 5 );
+scene.add( axesHelper );
 
 // Add rectangle to the scene to set the painting
 const geometryPlane = new THREE.PlaneGeometry(0.62, 0.43);
 const materialPlane = new THREE.MeshBasicMaterial({
   color: 689582,
   side: THREE.DoubleSide,
-  opacity: 0.01,
+  opacity: 0.008,
 });
 const plane = new THREE.Mesh(geometryPlane, materialPlane);
 plane.material.transparent = true;
@@ -100,6 +104,7 @@ function start(x, y, z) {
   cylinder.position.set(x, y, z);
   scene.add(cylinder);
   started = false;
+  plane.visible = false;
 } // create cylinder
 
 // Tab for Drag Controls
@@ -116,44 +121,50 @@ renderer.autoClear = false;
 const camera = new THREE.PerspectiveCamera();
 camera.matrixAutoUpdate = false;
 
-const buttonCircle = new THREE.CircleGeometry(0.25, 32);
+const buttonCircle = new THREE.CircleGeometry(0.06, 32);
+const buttonCircleFirst = new THREE.CircleGeometry(0.04, 32);
 const materialButton = new THREE.MeshBasicMaterial({
   side: THREE.DoubleSide,
 });
-const btnFirstArticle = new THREE.Mesh(buttonCircle, materialButton);
-btnFirstArticle.position.set(planex + 2, planey, -0.3);
-// btnFirstArticle position behind plane
-btnFirstArticle.rotation.y = -0.8;
+const btnFirstArticle = new THREE.Mesh(buttonCircleFirst, materialButton);
+btnFirstArticle.position.set(planex+0.1, planey, planez-0.3);
 const textureCircle = loader2.load(textureBtn);
 createCircle(btnFirstArticle);
 
 const btnSecondArticle = new THREE.Mesh(buttonCircle, materialButton);
-btnSecondArticle.position.set(planex + 2, planey, -0.8);
-btnSecondArticle.rotation.y = -0.8;
+btnSecondArticle.position.set(planex+1.5, planey+0.1, -0.3);
+btnSecondArticle.rotation.y = -1.7;
 createCircle(btnSecondArticle);
 
-const btnThirdArticle = new THREE.Mesh(buttonCircle, materialButton);
-btnThirdArticle.position.set(planex + 2.5, planey, -0.8);
-btnThirdArticle.rotation.y = -0.8;
-createCircle(btnThirdArticle);
+// const btnThirdArticle = new THREE.Mesh(buttonCircle, materialButton);
+// btnThirdArticle.position.set(planex + 2.5, planey, -0.8);
+// btnThirdArticle.rotation.y = -0.8;
+// createCircle(btnThirdArticle);
 
-const btnFourthArticle = new THREE.Mesh(buttonCircle, materialButton);
-btnFourthArticle.position.set(planex + 3, planey, -1.8);
-btnFourthArticle.rotation.y = -0.8;
-createCircle(btnFourthArticle);
+// const btnFourthArticle = new THREE.Mesh(buttonCircle, materialButton);
+// btnFourthArticle.position.set(planex + 3, planey, -1.8);
+// btnFourthArticle.rotation.y = -0.8;
+// createCircle(btnFourthArticle);
 
-const btnFifthArticle = new THREE.Mesh(buttonCircle, materialButton);
-btnFifthArticle.position.set(planex + 3.5, planey, 0);
-btnFifthArticle.rotation.y = -0.8;
-createCircle(btnFifthArticle);
+// const btnFifthArticle = new THREE.Mesh(buttonCircle, materialButton);
+// btnFifthArticle.position.set(planex + 3.5, planey, 0);
+// btnFifthArticle.rotation.y = -0.8;
+// createCircle(btnFifthArticle);
 
 function createCircle(mesh) {
   mesh.material.map = textureCircle;
-  mesh.scale.set(0.3, 0.3, 0.3);
+  mesh.scale.set(0.8, 0.8, 0.8);
   mesh.material.transparent = true;
   mesh.material.opacity = 0.8;
   scene.add(mesh);
 }
+
+// tab btn
+const btns = [btnFirstArticle, btnSecondArticle];
+// visible false
+btns.forEach((btn) => {
+  btn.visible = false;
+});
 
 const interactionManager = new InteractionManager(
   renderer,
@@ -167,6 +178,10 @@ plane.addEventListener("click", (event) => {
   // removebutton();
   pinchActivate = false;
   start(plane.position.x, plane.position.y, plane.position.z);
+  btns.forEach((btn) => {
+    btn.visible = true;
+  }
+  );
 });
 
 
@@ -179,18 +194,18 @@ interactionManager.add(btnSecondArticle);
 btnSecondArticle.addEventListener("click", (event) => {
   triggerArticle(article2);
 });
-interactionManager.add(btnThirdArticle);
-btnThirdArticle.addEventListener("click", (event) => {
-  triggerArticle(article3);
-});
-interactionManager.add(btnFourthArticle);
-btnFourthArticle.addEventListener("click", (event) => {
-  triggerArticle(article4);
-});
-interactionManager.add(btnFifthArticle);
-btnFifthArticle.addEventListener("click", (event) => {
-  triggerArticle(article5);
-});
+// interactionManager.add(btnThirdArticle);
+// btnThirdArticle.addEventListener("click", (event) => {
+//   triggerArticle(article3);
+// });
+// interactionManager.add(btnFourthArticle);
+// btnFourthArticle.addEventListener("click", (event) => {
+//   triggerArticle(article4);
+// });
+// interactionManager.add(btnFifthArticle);
+// btnFifthArticle.addEventListener("click", (event) => {
+//   triggerArticle(article5);
+// });
 
 // desactivate dragcontrols
 function removebutton() {
