@@ -15,6 +15,8 @@ let started = false;
 let pinchActivate = true;
 let inFiled = false;
 
+let audioBtn = new Audio("/son/sound_effect_bulle.mp3");
+
 // Articles
 let article1 = document.getElementById("cubisme");
 let article2 = document.getElementById("nymphisme");
@@ -23,6 +25,7 @@ let article4 = document.getElementById("artiste");
 let article5 = document.getElementById("lesBiches");
 
 document.getElementById("buttonStart").onclick = async () => {
+  audioBtn.play();
   await activateXR();
   started = true;
 };
@@ -50,7 +53,7 @@ scene.add(axesHelper);
 // Add rectangle to the scene to set the painting
 const geometryPlane = new THREE.PlaneGeometry(0.62, 0.43);
 const materialPlane = new THREE.MeshBasicMaterial({
-  color: 689582,
+  color: 0xffffff,
   side: THREE.DoubleSide,
   opacity: 0.008,
 });
@@ -80,6 +83,7 @@ function start(x, y, z) {
   scene.add(cylinder);
   started = false;
   plane.visible = false;
+  plane.position.set(0, 0, 20);
   let audio = new Audio("/son/Marie_Laurencin_Audio.mp3");
   audio.play();
 } // create cylinder
@@ -98,20 +102,17 @@ renderer.autoClear = false;
 const camera = new THREE.PerspectiveCamera();
 camera.matrixAutoUpdate = false;
 
-const buttonCircleFirst = new THREE.TorusGeometry(0.04, 0.005, 16, 100);
-const buttonCircleFirst2 = new THREE.TorusGeometry(0.06, 0.003, 16, 100);
 const buttonCircle = new THREE.TorusGeometry(0.05, 0.005, 16, 100);
 const buttonCircle2 = new THREE.TorusGeometry(0.07, 0.003, 16, 100);
 const materialButton = new THREE.MeshBasicMaterial({
   side: THREE.DoubleSide,
 });
-const btnFirstArticle = new THREE.Mesh(buttonCircleFirst, materialButton);
-const btnFirstArticle2 = new THREE.Mesh(buttonCircleFirst2, materialButton);
-btnFirstArticle.position.set(planex + 0.06, planey - 0.08, planez - 0.8);
-btnFirstArticle2.position.set(planex + 0.06, planey - 0.08, planez - 0.8);
+const btnFirstArticle = new THREE.Mesh(buttonCircle, materialButton);
+const btnFirstArticle2 = new THREE.Mesh(buttonCircle2, materialButton);
+btnFirstArticle.position.set(planex + 0.06, planey - 0.08, planez - 1.4);
+btnFirstArticle2.position.set(planex + 0.06, planey - 0.08, planez - 1.4);
 createCircle(btnFirstArticle);
 createCircle(btnFirstArticle2);
-// moins de bleu
 
 const btnSecondArticle = new THREE.Mesh(buttonCircle, materialButton);
 const btnSecondArticle2 = new THREE.Mesh(buttonCircle2, materialButton);
@@ -133,19 +134,22 @@ createCircle(btnThirdArticle2);
 
 const btnFourthArticle = new THREE.Mesh(buttonCircle, materialButton);
 const btnFourthArticle2 = new THREE.Mesh(buttonCircle2, materialButton);
-btnFourthArticle.position.set(planex + 0.6, planey - 0.15, planez + 1.5);
-btnFourthArticle2.position.set(planex + 0.6, planey - 0.15, planez + 1.5);
+btnFourthArticle.position.set(planex + 0.6, planey - 0.15, planez + 1.85);
+btnFourthArticle2.position.set(planex + 0.6, planey - 0.15, planez + 1.85);
 btnFourthArticle.rotation.y = -2.8;
 btnFourthArticle2.rotation.y = -2.8;
-// createCircle(btnFourthArticle);
-// createCircle(btnFourthArticle2);
+createCircle(btnFourthArticle);
+createCircle(btnFourthArticle2);
 
-// const btnFifthArticle = new THREE.Mesh(buttonCircle, materialButton);
-// btnFifthArticle.position.set(planex + 3.5, planey, 0);
-// btnFifthArticle.rotation.y = -0.8;
-// createCircle(btnFifthArticle);
+const btnFifthArticle = new THREE.Mesh(buttonCircle, materialButton);
+const btnFifthArticle2 = new THREE.Mesh(buttonCircle2, materialButton);
+btnFifthArticle.position.set(planex - 0.8, planey - 0.06, planez + 1.4);
+btnFifthArticle2.position.set(planex - 0.8, planey - 0.06, planez + 1.4);
+btnFifthArticle.rotation.y = 2.8;
+btnFifthArticle2.rotation.y = 2.8;
+createCircle(btnFifthArticle);
+createCircle(btnFifthArticle2);
 
-// every 2 secs, change scale of btns
 
 function animBtn(delta) {
   btns.forEach((btn) => {
@@ -174,6 +178,8 @@ const btns = [
   btnThirdArticle2,
   btnFourthArticle,
   btnFourthArticle2,
+  btnFifthArticle,
+  btnFifthArticle2,
 ];
 btns.forEach((btn) => {
   btn.visible = false;
@@ -196,42 +202,52 @@ plane.addEventListener("click", (event) => {
   });
 });
 
+
+
 // Interactive buttons -> Manage
 interactionManager.add(btnFirstArticle);
 interactionManager.add(btnFirstArticle2);
 btnFirstArticle.addEventListener("click", (event) => {
   if (btnFirstArticle.visible == true) {
     triggerArticle(article1);
+    audioBtn.play();
   }
 });
 btnFirstArticle2.addEventListener("click", (event) => {
   if (btnFirstArticle2.visible == true) {
     triggerArticle(article1);
+    audioBtn.play();
   }
 });
 interactionManager.add(btnSecondArticle);
 interactionManager.add(btnSecondArticle2);
 btnSecondArticle.addEventListener("click", (event) => {
   triggerArticle(article2);
+  audioBtn.play();
 });
 btnSecondArticle2.addEventListener("click", (event) => {
   triggerArticle(article2);
+  audioBtn.play();
 });
 interactionManager.add(btnThirdArticle);
 interactionManager.add(btnThirdArticle2);
 btnThirdArticle.addEventListener("click", (event) => {
   triggerArticle(article3);
+  audioBtn.play();
 });
 btnThirdArticle2.addEventListener("click", (event) => {
   triggerArticle(article3);
+  audioBtn.play();
 });
 interactionManager.add(btnFourthArticle);
 interactionManager.add(btnFourthArticle2);
 btnFourthArticle.addEventListener("click", (event) => {
   triggerArticle(article4);
+  audioBtn.play();
 });
 btnFourthArticle2.addEventListener("click", (event) => {
   triggerArticle(article4);
+  audioBtn.play();
 });
 // interactionManager.add(btnFifthArticle);
 // btnFifthArticle.addEventListener("click", (event) => {
