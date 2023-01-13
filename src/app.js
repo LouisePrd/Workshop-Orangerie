@@ -122,7 +122,7 @@ const camera = new THREE.PerspectiveCamera();
 camera.matrixAutoUpdate = false;
 
 const buttonCircle = new THREE.CircleGeometry(0.06, 32);
-const buttonCircleFirst = new THREE.CircleGeometry(0.04, 32);
+const buttonCircleFirst = new THREE.CircleGeometry(0.06, 32);
 const materialButton = new THREE.MeshBasicMaterial({
   side: THREE.DoubleSide,
 });
@@ -132,19 +132,19 @@ const textureCircle = loader2.load(textureBtn);
 createCircle(btnFirstArticle);
 
 const btnSecondArticle = new THREE.Mesh(buttonCircle, materialButton);
-btnSecondArticle.position.set(planex+1.5, planey+0.1, -0.3);
-btnSecondArticle.rotation.y = -1.7;
+btnSecondArticle.position.set(planex+0.7, planey+0.08, planez+0.3);
+btnSecondArticle.rotation.y = -1.2;
 createCircle(btnSecondArticle);
 
 const btnThirdArticle = new THREE.Mesh(buttonCircle, materialButton);
-btnThirdArticle.position.set(planex+0.9, planey-0.2, planez + 1.63);
-btnThirdArticle.rotation.y = -2;
+btnThirdArticle.position.set(planex+1.5, planey+0.1, -0.3);
+btnThirdArticle.rotation.y = -1.7;
 createCircle(btnThirdArticle);
 
-// const btnFourthArticle = new THREE.Mesh(buttonCircle, materialButton);
-// btnFourthArticle.position.set(planex + 3, planey, -1.8);
-// btnFourthArticle.rotation.y = -0.8;
-// createCircle(btnFourthArticle);
+const btnFourthArticle = new THREE.Mesh(buttonCircle, materialButton);
+btnFourthArticle.position.set(planex+0.8, planey-0.15, planez + 1.50);
+btnFourthArticle.rotation.y = -2.5;
+createCircle(btnFourthArticle);
 
 // const btnFifthArticle = new THREE.Mesh(buttonCircle, materialButton);
 // btnFifthArticle.position.set(planex + 3.5, planey, 0);
@@ -159,9 +159,7 @@ function createCircle(mesh) {
   scene.add(mesh);
 }
 
-// tab btn
-const btns = [btnFirstArticle, btnSecondArticle, btnThirdArticle]];
-// visible false
+const btns = [btnFirstArticle, btnSecondArticle, btnThirdArticle, btnFourthArticle];
 btns.forEach((btn) => {
   btn.visible = false;
 });
@@ -188,20 +186,22 @@ plane.addEventListener("click", (event) => {
 // Interactive buttons -> Manage
 interactionManager.add(btnFirstArticle);
 btnFirstArticle.addEventListener("click", (event) => {
+  if (btnFirstArticle.visible == true) {
   triggerArticle(article1);
+  }
 });
 interactionManager.add(btnSecondArticle);
 btnSecondArticle.addEventListener("click", (event) => {
   triggerArticle(article2);
 });
-// interactionManager.add(btnThirdArticle);
-// btnThirdArticle.addEventListener("click", (event) => {
-//   triggerArticle(article3);
-// });
-// interactionManager.add(btnFourthArticle);
-// btnFourthArticle.addEventListener("click", (event) => {
-//   triggerArticle(article4);
-// });
+interactionManager.add(btnThirdArticle);
+btnThirdArticle.addEventListener("click", (event) => {
+  triggerArticle(article3);
+});
+interactionManager.add(btnFourthArticle);
+btnFourthArticle.addEventListener("click", (event) => {
+  triggerArticle(article4);
+});
 // interactionManager.add(btnFifthArticle);
 // btnFifthArticle.addEventListener("click", (event) => {
 //   triggerArticle(article5);
@@ -270,7 +270,7 @@ async function activateXR() {
 
   const referenceSpace = await session.requestReferenceSpace("local");
 
-  // Create a render loop that allows us to draw on the AR view.
+  // Create a render loop that allows us to draw on the AR view
   const onXRFrame = (time, frame) => {
     session.requestAnimationFrame(onXRFrame);
 
@@ -288,7 +288,7 @@ async function activateXR() {
       const viewport = session.renderState.baseLayer.getViewport(view);
       renderer.setSize(viewport.width, viewport.height);
 
-      // Use the view's transform matrix and projection matrix to configure the THREE.camera.
+      // Use the view's transform matrix and projection matrix
       camera.matrix.fromArray(view.transform.matrix);
       camera.projectionMatrix.fromArray(view.projectionMatrix);
       camera.updateMatrixWorld(true);
