@@ -14,7 +14,7 @@ La technologie d'aujourd'hui nous permet de réinterpréter le contemporain, d'�
 Cliquez sur la forme blanche et le spectable commence !
 Des écouteurs sont conseillés pour profiter d'une expérience optimale.  
 
-Plongez dans l'univers de Marie Laurencin à travers une expérience en réalité augmenté A 360°c.  
+Plongez dans l'univers de Marie Laurencin à travers une expérience en réalité augmentée à 360°c.  
 
 Découvrez l'histoire de Marie laurencin, son parcours, ainsi que ses œuvres dans un univers À MI-CHEMIN entre peinture et intelligence artificielle.
 
