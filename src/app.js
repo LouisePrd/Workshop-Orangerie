@@ -5,6 +5,8 @@ import { InteractionManager } from "three.interactive";
 import { XRControllerModelFactory } from "three/examples/jsm/webxr/XRControllerModelFactory.js";
 import { XRHandModelFactory } from "three/examples/jsm/webxr/XRHandModelFactory.js";
 import { AxesHelper } from "three";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 
 // marri
 import bg from "./assets/bg.jpg";
@@ -69,8 +71,8 @@ function onWindowResize() {
 }
 
 const scene = new THREE.Scene();
-const axesHelper = new THREE.AxesHelper( 5 );
-scene.add( axesHelper );
+const axesHelper = new THREE.AxesHelper(5);
+scene.add(axesHelper);
 
 // Add rectangle to the scene to set the painting
 const geometryPlane = new THREE.PlaneGeometry(0.62, 0.43);
@@ -100,11 +102,13 @@ const cylinder = new THREE.Mesh(
 );
 
 function start(x, y, z) {
-  cylinder.scale.set(-1, plane.scale.y * 1.2 , plane.scale.z);
+  cylinder.scale.set(-1, plane.scale.y * 1.2, plane.scale.z);
   cylinder.position.set(x, y, z);
   scene.add(cylinder);
   started = false;
   plane.visible = false;
+  let audio = new Audio("/son/Marie_Laurencin_Audio.mp3");
+  audio.play();
 } // create cylinder
 
 // Tab for Drag Controls
@@ -127,22 +131,22 @@ const materialButton = new THREE.MeshBasicMaterial({
   side: THREE.DoubleSide,
 });
 const btnFirstArticle = new THREE.Mesh(buttonCircleFirst, materialButton);
-btnFirstArticle.position.set(planex+0.1, planey, planez-0.3);
+btnFirstArticle.position.set(planex + 0.1, planey, planez - 0.3);
 const textureCircle = loader2.load(textureBtn);
 createCircle(btnFirstArticle);
 
 const btnSecondArticle = new THREE.Mesh(buttonCircle, materialButton);
-btnSecondArticle.position.set(planex+0.7, planey+0.08, planez+0.3);
+btnSecondArticle.position.set(planex + 0.7, planey + 0.08, planez + 0.3);
 btnSecondArticle.rotation.y = -1.2;
 createCircle(btnSecondArticle);
 
 const btnThirdArticle = new THREE.Mesh(buttonCircle, materialButton);
-btnThirdArticle.position.set(planex+1.5, planey+0.1, -0.3);
+btnThirdArticle.position.set(planex + 1.5, planey + 0.1, -0.3);
 btnThirdArticle.rotation.y = -1.7;
 createCircle(btnThirdArticle);
 
 const btnFourthArticle = new THREE.Mesh(buttonCircle, materialButton);
-btnFourthArticle.position.set(planex+0.8, planey-0.15, planez + 1.50);
+btnFourthArticle.position.set(planex + 0.8, planey - 0.15, planez + 1.5);
 btnFourthArticle.rotation.y = -2.5;
 createCircle(btnFourthArticle);
 
@@ -159,7 +163,12 @@ function createCircle(mesh) {
   scene.add(mesh);
 }
 
-const btns = [btnFirstArticle, btnSecondArticle, btnThirdArticle, btnFourthArticle];
+const btns = [
+  btnFirstArticle,
+  btnSecondArticle,
+  btnThirdArticle,
+  btnFourthArticle,
+];
 btns.forEach((btn) => {
   btn.visible = false;
 });
@@ -178,16 +187,14 @@ plane.addEventListener("click", (event) => {
   start(plane.position.x, plane.position.y, plane.position.z);
   btns.forEach((btn) => {
     btn.visible = true;
-  }
-  );
+  });
 });
-
 
 // Interactive buttons -> Manage
 interactionManager.add(btnFirstArticle);
 btnFirstArticle.addEventListener("click", (event) => {
   if (btnFirstArticle.visible == true) {
-  triggerArticle(article1);
+    triggerArticle(article1);
   }
 });
 interactionManager.add(btnSecondArticle);
@@ -279,6 +286,71 @@ async function activateXR() {
       gl.FRAMEBUFFER,
       session.renderState.baseLayer.framebuffer
     );
+
+    /**
+     * Models
+     */
+
+    // const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+    // scene.add(ambientLight);
+
+    // const dracoLoader = new DRACOLoader();
+    // dracoLoader.setDecoderPath("/musicBox/draco/");
+
+    // const gltfLoader = new GLTFLoader();
+    // gltfLoader.setDRACOLoader(dracoLoader);
+
+    // gltfLoader.load("/musicBox/models/box1.glb", (glb) => {
+    //   glb.scene.scale.set(0.025, 0.025, 0.025);
+    //   glb.scene.position.z -= 0.5;
+    //   scene.add(glb.scene);
+    // });
+
+    // gltfLoader.load("/musicBox/models/box2.glb", (glb) => {
+    //   glb.scene.scale.set(0.025, 0.025, 0.025);
+    //   // glb.scene.position.x += -1;
+    //   glb.scene.position.y += 0.02;
+    //   glb.scene.position.z -= 0.5;
+    //   glb.scene.rotateX(Math.PI * -0.5);
+    //   glb.scene.rotateY(Math.PI * -0.5);
+    //   scene.add(glb.scene);
+
+    //   session.requestAnimationFrame(animate);
+
+    //   function animate() {
+    //     glb.scene.rotation.x += 0.01;
+    //     if (glb.scene.rotation.x < 0) {
+    //       session.requestAnimationFrame(animate);
+    //     }
+    //   }
+    // });
+
+    // gltfLoader.load("/musicBox/models/danse1.glb", (glb) => {
+    //   glb.scene.scale.set(0.025, 0.025, 0.025);
+
+    //   scene.add(glb.scene);
+    //   glb.scene.position.z -= 0.5;
+    //   session.requestAnimationFrame(animate);
+
+    //   function animate() {
+    //     glb.scene.rotation.y += 0.1;
+    //     session.requestAnimationFrame(animate);
+    //   }
+    // });
+
+    // gltfLoader.load("/musicBox/models/danse2.glb", (glb) => {
+    //   glb.scene.scale.set(0.025, 0.025, 0.025);
+    //   glb.scene.position.z -= 0.5;
+
+    //   scene.add(glb.scene);
+
+    //   session.requestAnimationFrame(animate);
+
+    //   function animate() {
+    //     glb.scene.rotation.y += 0.1;
+    //     session.requestAnimationFrame(animate);
+    //   }
+    // });
 
     const pose = frame.getViewerPose(referenceSpace);
 
