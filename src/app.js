@@ -147,21 +147,9 @@ btnFourthArticle2.rotation.y = -2.8;
 
 // every 2 secs, change scale of btns
 
-function animBtn() {
+function animBtn(delta) {
   btns.forEach((btn) => {
-    if (btn.scale.x > 1.15) {
-      btn.scale.set(
-        (btn.scale.x -= 0.01),
-        (btn.scale.y -= 0.01),
-        (btn.scale.z -= 0.01)
-      );
-    } else {
-      btn.scale.set(
-        (btn.scale.x += 0.01),
-        (btn.scale.y += 0.01),
-        (btn.scale.z += 0.01)
-      );
-    }
+    btn.scale.set(1 + Math.sin(delta / 1000) / 10, 1 + Math.sin(delta / 1000) / 10, 1);
   });
   requestAnimationFrame(animBtn);
 }

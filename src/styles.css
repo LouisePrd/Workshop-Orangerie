@@ -177,15 +177,51 @@ div {
   z-index:0 !important;
 }
 
+.prePage {
+  position:relative;
+  width:100vw;
+  height:100vh;
+  background-color:var(--main);
+}
+
+.veil {
+  width: 100vw;
+  height: 100vh;
+  background-color:rgb(255, 255, 255, .7);
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.prePage img {
+  width:80%;
+}
+
+.prePage button {
+  position:absolute;
+  top:45vh;
+  left:35vw;
+  width:30vw;
+  height:30vw;
+  color:var(--main);
+  background:none;
+  border:12px double var(--main) !important;
+  border-radius: 50%;
+  font-family: var(--alternative);
+  font-size:1rem;
+  letter-spacing: 1px;
+}
+
 .article {
   display:none;
   position:absolute;
-  z-index:100 !important;
+  z-index:10 !important;
   top:120vh;
+  /* top:0vh; */
   left:0;
-  padding-top:2vh;
   width:100vw;
-  height:auto;
+  height:100vh;
+  overflow-y: hidden;
   overflow-x: hidden;
   background-color:var(--main);
   transition:2s ease-in-out;
@@ -203,6 +239,7 @@ hr {
   display:flex;
   flex-direction: column;
   padding:0vw 8vw;
+  padding-top:2vh;
 }
 
 #back1, #back2, #back3, #back4, #back5 {
@@ -256,10 +293,6 @@ hr {
   border:1.5px solid var(--dark);
 }
 
-.secondPage iframe {
-  margin:6vh 0vh;
-}
-
 /* ===== Third Page ===== */ 
 
 .thirdPage {
@@ -282,10 +315,9 @@ hr {
 
 h1 {
   margin-top:5vh;
-  margin-left:-20vw;
   font-size: 2.1rem;
   line-height:40px;
-  opacity:0;
+  opacity:1;
   transition:1s ease-in;
   /*--- Destination ---
     opacity:1;
@@ -335,12 +367,18 @@ h1 {
 
 /* -- Specificities -- */
 
-/* #artiste {
-  display: block;
-} */
+#cubisme .prePage {
+  background: url('/src/assets/frame-cubisme.png') center;
+  background-size:cover;
+}
 
 #cubisme .thirdPage {
-  background: url('/src/assets/ml-cubisme.png') center no-repeat;
+  background: url('/src/assets/ml-cubisme.png') center;
+  background-size:cover;
+}
+
+#nymphisme .prePage {
+  background: url('/src/assets/frame-nymphisme.png') center;
   background-size:cover;
 }
 
@@ -353,6 +391,11 @@ h1 {
   background-size:cover;
 }
 
+#feminisme .prePage {
+  background: url('/src/assets/frame-feminisme.png') center;
+  background-size:cover;
+}
+
 #feminisme .thirdPage {
   display:flex;
   align-items: center;
@@ -362,12 +405,22 @@ h1 {
   background-size:cover;
 }
 
+#artiste .prePage {
+  background: url('/src/assets/frame-artiste.png') center;
+  background-size:cover;
+}
+
 #artiste .thirdPage {
   display:flex;
   align-items: center;
   height:70vh;
   text-align: right;
   background: url('/src/assets/exemple-artiste.png') center no-repeat;
+  background-size:cover;
+}
+
+#lesBiches .prePage {
+  background: url('/src/assets/frame-lesbiches.png') center;
   background-size:cover;
 }
 
