@@ -13,10 +13,10 @@ La technologie d'aujourd'hui nous permet de réinterpréter le contemporain, d'�
 
 ## L'EXPERIENCE
 À l'aide de votre smartphone ou votre tablette : placez-vous devant le tableau pour le scanner. 
-Cliquez sur la forme blanche et le spectable commence !
+Cliquez sur la forme blanche et le spectacle commence !
 Des écouteurs sont conseillés pour profiter d'une expérience optimale.  
 
-Plongez dans l'univers de Marie Laurencin à travers une expérience en réalité augmentée à 360°: découvrez son histoire, son parcours, ainsi que ses œuvres dans un univers À MI-CHEMIN entre peinture et intelligence artificielle.
+Plongez dans l'univers de Marie Laurencin à travers une expérience en réalité augmentée à 360°: découvrez son histoire, son parcours, ainsi que ses œuvres dans un univers <strong>à mi-chemin entre peinture et intelligence artificielle.</strong>
 
  ## MAQUETTE
  Ce projet a été fait par groupe de 5 étudiants : 3 développeurs et 2 designers. Voilà la maquette :
