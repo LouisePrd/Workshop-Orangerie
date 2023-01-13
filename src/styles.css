@@ -101,6 +101,7 @@ button {
 
 #intro1 span {
   font-style:italic;
+  letter-spacing:1px;
 }
 
 #intro1 img {
@@ -135,7 +136,7 @@ button {
 }
 
 #phone {
-  width:21vw;
+  width:35vw;
 }
 
 /* ===== Intro 2 ===== */ 
@@ -160,15 +161,14 @@ button {
 }
 
 #intro3 button {
-  padding:5vw 7vw;
-  border:4px solid var(--main);
+  padding:4.5vw 6.5vw;
+  border:3.5px solid var(--main);
   border-radius: 38px;
   color:var(--main);
   background:none;
   font-family: var(--alternative);
-  font-size:1.25rem;
+  font-size:1.1rem;
   transition:1.5s ease-in;
-  letter-spacing: -1px;
 }
 
 /* ======= ARTICLES ======= */ 
@@ -195,6 +195,16 @@ div {
 
 .prePage img {
   width:80%;
+  animation:animPrePage 1.4s ease-in-out infinite alternate;
+}
+
+@keyframes animPrePage {
+  0% {
+    filter:brightness(1);
+  }
+  100% {
+    filter:brightness(1.2);
+  }
 }
 
 .prePage button {
@@ -210,6 +220,16 @@ div {
   font-family: var(--alternative);
   font-size:1rem;
   letter-spacing: 1px;
+  animation:animDiscover 1.4s ease-in-out infinite alternate;
+}
+
+@keyframes animDiscover {
+  0% {
+    transform:scale(1);
+  }
+  100% {
+    transform:scale(1.1);
+  }
 }
 
 .article {

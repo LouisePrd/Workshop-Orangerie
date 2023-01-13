@@ -30,7 +30,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
     var discover4 = document.getElementById("discover4");
     var discover5 = document.getElementById("discover5");
 
-
   back1.addEventListener("click", (event) => {
     article1.style.top = "120vh";
     setTimeout(() => {
@@ -95,24 +94,19 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
   // ===== Introduction animation =====
 
-  // appear(intro1);
-  // setTimeout(() => {
-  //     disappear(intro1);
-  //   }, 4000)
-  // setTimeout(() => {
-  //     appear(intro2);
-  // }, 5600)
-  // setTimeout(() => {
-  //     disappear(intro2);
-  // }, 8000)
-  // setTimeout(() => {
-  //     appear(intro3);
-  // }, 9000)
-  // setTimeout(() => {
-  //     start.style.letterSpacing = "4px";
-  // }, 9000)
-
-  // ===== Articles animation =====
+  appear(intro1);
+  setTimeout(() => {
+      disappear(intro1);
+    }, 4000)
+  setTimeout(() => {
+      appear(intro2);
+  }, 5600)
+  setTimeout(() => {
+      disappear(intro2);
+  }, 8000)
+  setTimeout(() => {
+      appear(intro3);
+  }, 9000)
 });
 
 // ===== FUNCTIONS =====
