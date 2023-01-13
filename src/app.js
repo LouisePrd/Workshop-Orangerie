@@ -98,19 +98,20 @@ renderer.autoClear = false;
 const camera = new THREE.PerspectiveCamera();
 camera.matrixAutoUpdate = false;
 
-const buttonCircleFirst = new THREE.TorusGeometry(0.05, 0.005, 16, 100);
-const buttonCircleFirst2 = new THREE.TorusGeometry(0.07, 0.003, 16, 100);
-const buttonCircle = new THREE.TorusGeometry(0.06, 0.005, 16, 100);
-const buttonCircle2 = new THREE.TorusGeometry(0.08, 0.003, 16, 100);
+const buttonCircleFirst = new THREE.TorusGeometry(0.04, 0.005, 16, 100);
+const buttonCircleFirst2 = new THREE.TorusGeometry(0.06, 0.003, 16, 100);
+const buttonCircle = new THREE.TorusGeometry(0.05, 0.005, 16, 100);
+const buttonCircle2 = new THREE.TorusGeometry(0.07, 0.003, 16, 100);
 const materialButton = new THREE.MeshBasicMaterial({
   side: THREE.DoubleSide,
 });
 const btnFirstArticle = new THREE.Mesh(buttonCircleFirst, materialButton);
 const btnFirstArticle2 = new THREE.Mesh(buttonCircleFirst2, materialButton);
-btnFirstArticle.position.set(planex + 0.05, planey - 0.08, planez - 0.8);
-btnFirstArticle2.position.set(planex + 0.05, planey - 0.08, planez - 0.8);
+btnFirstArticle.position.set(planex + 0.06, planey - 0.08, planez - 0.8);
+btnFirstArticle2.position.set(planex + 0.06, planey - 0.08, planez - 0.8);
 createCircle(btnFirstArticle);
 createCircle(btnFirstArticle2);
+// moins de bleu
 
 const btnSecondArticle = new THREE.Mesh(buttonCircle, materialButton);
 const btnSecondArticle2 = new THREE.Mesh(buttonCircle2, materialButton);
@@ -118,17 +119,17 @@ btnSecondArticle.position.set(planex + 1.6, planey + 0.08, planez - 0.6);
 btnSecondArticle2.position.set(planex + 1.6, planey + 0.08, planez - 0.6);
 btnSecondArticle.rotation.y = -1.2;
 btnSecondArticle2.rotation.y = -1.2;
-createCircle(btnSecondArticle);
 createCircle(btnSecondArticle2);
+createCircle(btnSecondArticle);
 
 const btnThirdArticle = new THREE.Mesh(buttonCircle, materialButton);
 const btnThirdArticle2 = new THREE.Mesh(buttonCircle2, materialButton);
-btnThirdArticle.position.set(planex + 1.5, planey + 0.1, -0.3);
-btnThirdArticle2.position.set(planex + 1.5, planey + 0.1, -0.3);
-btnThirdArticle.rotation.y = -1.7;
-btnThirdArticle2.rotation.y = -1.7;
-// createCircle(btnThirdArticle);
-// createCircle(btnThirdArticle2);
+btnThirdArticle.position.set(planex + 1.8, planey + 0.1, -0.4);
+btnThirdArticle2.position.set(planex + 1.8, planey + 0.1, -0.4);
+btnThirdArticle.rotation.y = -1.6;
+btnThirdArticle2.rotation.y = -1.6;
+createCircle(btnThirdArticle);
+createCircle(btnThirdArticle2);
 
 const btnFourthArticle = new THREE.Mesh(buttonCircle, materialButton);
 const btnFourthArticle2 = new THREE.Mesh(buttonCircle2, materialButton);
@@ -209,21 +210,39 @@ plane.addEventListener("click", (event) => {
 
 // Interactive buttons -> Manage
 interactionManager.add(btnFirstArticle);
+interactionManager.add(btnFirstArticle2);
 btnFirstArticle.addEventListener("click", (event) => {
   if (btnFirstArticle.visible == true) {
     triggerArticle(article1);
   }
 });
+btnFirstArticle2.addEventListener("click", (event) => {
+  if (btnFirstArticle2.visible == true) {
+    triggerArticle(article1);
+  }
+});
 interactionManager.add(btnSecondArticle);
+interactionManager.add(btnSecondArticle2);
 btnSecondArticle.addEventListener("click", (event) => {
   triggerArticle(article2);
 });
+btnSecondArticle2.addEventListener("click", (event) => {
+  triggerArticle(article2);
+});
 interactionManager.add(btnThirdArticle);
+interactionManager.add(btnThirdArticle2);
 btnThirdArticle.addEventListener("click", (event) => {
   triggerArticle(article3);
 });
+btnThirdArticle2.addEventListener("click", (event) => {
+  triggerArticle(article3);
+});
 interactionManager.add(btnFourthArticle);
+interactionManager.add(btnFourthArticle2);
 btnFourthArticle.addEventListener("click", (event) => {
+  triggerArticle(article4);
+});
+btnFourthArticle2.addEventListener("click", (event) => {
   triggerArticle(article4);
 });
 // interactionManager.add(btnFifthArticle);
