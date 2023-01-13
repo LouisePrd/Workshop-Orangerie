@@ -48,7 +48,6 @@ function onWindowResize() {
 
 const scene = new THREE.Scene();
 const axesHelper = new THREE.AxesHelper(5);
-scene.add(axesHelper);
 
 // Add rectangle to the scene to set the painting
 const geometryPlane = new THREE.PlaneGeometry(0.62, 0.43);

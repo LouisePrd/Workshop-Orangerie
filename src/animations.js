@@ -34,35 +34,35 @@ window.addEventListener("DOMContentLoaded", (event) => {
     article1.style.top = "120vh";
     setTimeout(() => {
       article1.style.display = "none";
-    }, 1300);
+    }, 1000);
   });
 
   back2.addEventListener("click", (event) => {
     article2.style.top = "120vh";
     setTimeout(() => {
       article2.style.display = "none";
-    }, 1300);
+    }, 1000);
   });
 
   back3.addEventListener("click", (event) => {
     article3.style.top = "120vh";
     setTimeout(() => {
       article3.style.display = "none";
-    }, 1300);
+    }, 1000);
   });
 
   back4.addEventListener("click", (event) => {
     article4.style.top = "120vh";
     setTimeout(() => {
       article4.style.display = "none";
-    }, 1300);
+    }, 1000);
   });
 
   back5.addEventListener("click", (event) => {
     article5.style.top = "120vh";
     setTimeout(() => {
       article5.style.display = "none";
-    }, 1300);
+    }, 1000);
   });
 
   // Discover triggers
