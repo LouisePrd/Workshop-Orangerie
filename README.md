@@ -1,9 +1,10 @@
 # Workshop-Orangerie
 
-En collaboration avec le musée de l'Orangerie<br>
-<strong>Lien de l'espérience</strong> : <br>
-https://spectacular-syrniki-bf026e.netlify.app/<br>
-(Attention : sur tablette et téléphone seulement)
+
+En collaboration avec <a href="https://www.musee-orangerie.fr/fr" target="_blank">le musée de l'Orangerie</a>, <strong>MARI-E</strong>, une expérience en réalité augmentée à 360°<br><br>
+<strong>Démo</strong> : https://youtube.com/shorts/yh_1zn_Y2OQ?feature=share<br>
+<strong>Lien</strong> : https://spectacular-syrniki-bf026e.netlify.app/ (tablette/téléphone only, si IOS : appli XRViewer)<br>
+<strong>Borchure</strong> : [MARI-E.pdf](https://github.com/LouisePrd/Workshop-Orangerie/files/10414721/MAR-E.pdf)
 
 ## LE CONCEPT
 Partez à la découverte de la vie de <strong>Marie Laurencin</strong> à travers le tableau « Les Biches », un hommage à son parcours en tant que femme artiste précurseure de son temps, peintre, écrivaine et lesbienne. 
@@ -14,11 +15,13 @@ La technologie d'aujourd'hui nous permet de réinterpréter le contemporain, d'�
 Cliquez sur la forme blanche et le spectable commence !
 Des écouteurs sont conseillés pour profiter d'une expérience optimale.  
 
-Plongez dans l'univers de Marie Laurencin à travers une expérience en réalité augmentée à 360°c.  
-
-Découvrez l'histoire de Marie laurencin, son parcours, ainsi que ses œuvres dans un univers À MI-CHEMIN entre peinture et intelligence artificielle.
+Plongez dans l'univers de Marie Laurencin à travers une expérience en réalité augmentée à 360°: découvrez son histoire, son parcours, ainsi que ses œuvres dans un univers À MI-CHEMIN entre peinture et intelligence artificielle.
 
  ## MAQUETTE
- 
- Ce projet a été fait par groupe de 5 étudiants : 3 développeurs et 2 designers. Voilà la maquette de ces derniers :
+ Ce projet a été fait par groupe de 5 étudiants : 3 développeurs et 2 designers. Voilà la maquette :
  https://xd.adobe.com/view/c66c56c5-1d9d-4358-a549-97bc15af8b5e-933f/
+
+ ## RESULTAT
+ 
+ https://youtube.com/shorts/yh_1zn_Y2OQ?feature=share
+ 
