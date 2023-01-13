@@ -7,7 +7,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
   // Buttons
   var start = document.getElementById("buttonStart");
-  var back = document.getElementById("back");
+  // var back = document.querySelector(".back");
 
   // Articles
   let article1 = document.getElementById("cubisme");
@@ -16,18 +16,60 @@ window.addEventListener("DOMContentLoaded", (event) => {
   let article4 = document.getElementById("artiste");
   let article5 = document.getElementById("lesBiches");
 
-  back.addEventListener("click", (event) => {
-    article1.style.top = "120vh";
-    article2.style.top = "120vh";
-    article3.style.top = "120vh";
-    article4.style.top = "120vh";
-    article5.style.top = "120vh";
+  // back.addEventListener("click", (event) => {
+  //   alert("back");
+  //   article1.style.top = "120vh";
+  //   article2.style.top = "120vh";
+  //   article3.style.top = "120vh";
+  //   article4.style.top = "120vh";
+  //   article5.style.top = "120vh";
 
+  //   setTimeout(() => {
+  //     article1.style.display = "none";
+  //     article2.style.display = "none";
+  //     article3.style.display = "none";
+  //     article4.style.display = "none";
+  //     article5.style.display = "none";
+  //   }, 2000);
+  // });
+
+  var back1 = document.getElementById("back1");
+  var back2 = document.getElementById("back2");
+  var back3 = document.getElementById("back3");
+  var back4 = document.getElementById("back4");
+  var back5 = document.getElementById("back5");
+
+  back1.addEventListener("click", (event) => {
+    article1.style.top = "120vh";
     setTimeout(() => {
       article1.style.display = "none";
+    }, 2000);
+  });
+
+  back2.addEventListener("click", (event) => {
+    article2.style.top = "120vh";
+    setTimeout(() => {
       article2.style.display = "none";
+    }, 2000);
+  });
+
+  back3.addEventListener("click", (event) => {
+    article3.style.top = "120vh";
+    setTimeout(() => {
       article3.style.display = "none";
+    }, 2000);
+  });
+
+  back4.addEventListener("click", (event) => {
+    article4.style.top = "120vh";
+    setTimeout(() => {
       article4.style.display = "none";
+    }, 2000);
+  });
+
+  back5.addEventListener("click", (event) => {
+    article5.style.top = "120vh";
+    setTimeout(() => {
       article5.style.display = "none";
     }, 2000);
   });

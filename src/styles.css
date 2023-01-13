@@ -205,7 +205,7 @@ hr {
   padding:0vw 8vw;
 }
 
-#back {
+#back1, #back2, #back3, #back4, #back5 {
   padding-top:1.5vh;
   text-align:left;
   color:var(--intro);
@@ -213,7 +213,7 @@ hr {
   font-size:1rem;
 }
 
-#back span {
+#back1 span, #back2 span, #back3 span, #back4 span, #back5 span {
   padding-right:1vw;
   vertical-align:middle;
   font-size:2.8rem;
