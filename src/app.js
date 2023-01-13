@@ -126,17 +126,17 @@ const camera = new THREE.PerspectiveCamera();
 camera.matrixAutoUpdate = false;
 
 const buttonCircle = new THREE.CircleGeometry(0.06, 32);
-const buttonCircleFirst = new THREE.CircleGeometry(0.06, 32);
+const buttonCircleFirst = new THREE.CircleGeometry(0.05, 32);
 const materialButton = new THREE.MeshBasicMaterial({
   side: THREE.DoubleSide,
 });
 const btnFirstArticle = new THREE.Mesh(buttonCircleFirst, materialButton);
-btnFirstArticle.position.set(planex + 0.1, planey, planez - 0.3);
+btnFirstArticle.position.set(planex + 0.1, planey - 0.08, planez - 0.3);
 const textureCircle = loader2.load(textureBtn);
 createCircle(btnFirstArticle);
 
 const btnSecondArticle = new THREE.Mesh(buttonCircle, materialButton);
-btnSecondArticle.position.set(planex + 0.7, planey + 0.08, planez + 0.3);
+btnSecondArticle.position.set(planex - 0.05, planey + 0.08, planez + 0.3);
 btnSecondArticle.rotation.y = -1.2;
 createCircle(btnSecondArticle);
 
@@ -146,8 +146,8 @@ btnThirdArticle.rotation.y = -1.7;
 createCircle(btnThirdArticle);
 
 const btnFourthArticle = new THREE.Mesh(buttonCircle, materialButton);
-btnFourthArticle.position.set(planex + 0.8, planey - 0.15, planez + 1.5);
-btnFourthArticle.rotation.y = -2.5;
+btnFourthArticle.position.set(planex + 0.6, planey - 0.15, planez + 1.5);
+btnFourthArticle.rotation.y = -2.8;
 createCircle(btnFourthArticle);
 
 // const btnFifthArticle = new THREE.Mesh(buttonCircle, materialButton);
