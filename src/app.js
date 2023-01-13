@@ -136,10 +136,10 @@ btnSecondArticle.position.set(planex+1.5, planey+0.1, -0.3);
 btnSecondArticle.rotation.y = -1.7;
 createCircle(btnSecondArticle);
 
-// const btnThirdArticle = new THREE.Mesh(buttonCircle, materialButton);
-// btnThirdArticle.position.set(planex + 2.5, planey, -0.8);
-// btnThirdArticle.rotation.y = -0.8;
-// createCircle(btnThirdArticle);
+const btnThirdArticle = new THREE.Mesh(buttonCircle, materialButton);
+btnThirdArticle.position.set(planex+0.9, planey-0.2, planez + 1.63);
+btnThirdArticle.rotation.y = -2;
+createCircle(btnThirdArticle);
 
 // const btnFourthArticle = new THREE.Mesh(buttonCircle, materialButton);
 // btnFourthArticle.position.set(planex + 3, planey, -1.8);
@@ -160,7 +160,7 @@ function createCircle(mesh) {
 }
 
 // tab btn
-const btns = [btnFirstArticle, btnSecondArticle];
+const btns = [btnFirstArticle, btnSecondArticle, btnThirdArticle]];
 // visible false
 btns.forEach((btn) => {
   btn.visible = false;
