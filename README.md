@@ -8,7 +8,7 @@ Groupe de 5 étudiants : 3 développeurs et 2 designers. En collaboration avec <
 
 ## LE CONCEPT
 Partez à la découverte de la vie de <strong>Marie Laurencin</strong> à travers le tableau « Les Biches », un hommage à son parcours en tant que femme artiste précurseure de son temps, peintre, écrivaine et lesbienne. 
-La technologie d'aujourd'hui nous permet de réinterpréter le contemporain, d'étendre,  de détourner des œuvres Pour créer un tableau vivant et poétique reprenant les codes graphiques de l'artiste.
+La technologie d'aujourd'hui nous permet de réinterpréter le contemporain, d'étendre,  de détourner des œuvres pour créer un tableau vivant et poétique reprenant les codes graphiques de l'artiste.
 
 ## L'EXPERIENCE
 À l'aide de votre smartphone ou votre tablette : placez-vous devant le tableau pour le scanner. 
@@ -23,5 +23,4 @@ WebXR, ThreeJS, Parcel
 
  ## RESULTAT
  
- https://youtube.com/shorts/yh_1zn_Y2OQ?feature=share
- 
+https://youtube.com/shorts/eGc6O4zKbog?feature=share
