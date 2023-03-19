@@ -2,7 +2,6 @@
 
 Groupe de 5 étudiants : 3 développeurs et 2 designers. En collaboration avec <a href="https://www.musee-orangerie.fr/fr" target="_blank">le musée de l'Orangerie</a>, <strong>MARI-E</strong>, une expérience en réalité augmentée à 360°<br><br>
 <strong>Démo</strong> : https://youtube.com/shorts/yh_1zn_Y2OQ?feature=share<br>
-<strong>Lien</strong> : https://spectacular-syrniki-bf026e.netlify.app/ (tablette/téléphone only, si IOS : appli XRViewer)<br>
 <strong>Borchure</strong> : [MARI-E.pdf](https://github.com/LouisePrd/Workshop-Orangerie/files/10414721/MAR-E.pdf)<br>
 <strong>Maquette</strong> : https://xd.adobe.com/view/c66c56c5-1d9d-4358-a549-97bc15af8b5e-933f/
 
